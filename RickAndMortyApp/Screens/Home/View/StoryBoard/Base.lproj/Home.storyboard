@@ -20,31 +20,66 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" red="0.077782221139999996" green="0.61761075259999998" blue="0.79253411289999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thM-5q-O6o">
-                                <rect key="frame" x="106.66666666666669" y="393" width="180" height="66"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="0.55445467715231789" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="66" id="wDk-hg-mfv"/>
-                                </constraints>
-                                <buttonConfiguration key="configuration" style="tinted" title="Characters">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <color key="baseBackgroundColor" red="0.077782221139999996" green="0.61761075259999998" blue="0.79253411289999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
-                                </userDefinedRuntimeAttributes>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="tg9-T1-hpK">
+                                <rect key="frame" x="106.66666666666669" y="293" width="180" height="266"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thM-5q-O6o">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="66"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="0.55445467715231789" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="wDk-hg-mfv"/>
+                                        </constraints>
+                                        <buttonConfiguration key="configuration" style="tinted" title="Characters">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" red="0.077782221139999996" green="0.61761075259999998" blue="0.79253411289999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weQ-KS-J5a">
+                                        <rect key="frame" x="0.0" y="100" width="180" height="66"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="0.55445467719999997" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="Q5S-2u-uRx"/>
+                                        </constraints>
+                                        <buttonConfiguration key="configuration" style="tinted" title="Locations">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" red="0.077782221139999996" green="0.61761075259999998" blue="0.79253411289999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFV-rl-dQs">
+                                        <rect key="frame" x="0.0" y="200" width="180" height="66"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="0.55445467719999997" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="ALc-g4-KbW"/>
+                                        </constraints>
+                                        <buttonConfiguration key="configuration" style="tinted" title="Episodes">
+                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="30"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" red="0.077782221139999996" green="0.61761075259999998" blue="0.79253411289999998" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="thM-5q-O6o" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Es0-fE-rC8"/>
                             <constraint firstItem="37f-Fo-Oo0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="PV4-dU-6ID"/>
+                            <constraint firstItem="tg9-T1-hpK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="d7U-f2-zKH"/>
                             <constraint firstAttribute="bottom" secondItem="37f-Fo-Oo0" secondAttribute="bottom" id="n64-Re-qgy"/>
                             <constraint firstItem="37f-Fo-Oo0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="n9v-38-6Kg"/>
                             <constraint firstItem="37f-Fo-Oo0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="qur-qx-p2i"/>
-                            <constraint firstItem="thM-5q-O6o" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="s1r-6a-YFf"/>
+                            <constraint firstItem="tg9-T1-hpK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="re9-Dm-LAo"/>
                         </constraints>
                     </view>
                 </viewController>
