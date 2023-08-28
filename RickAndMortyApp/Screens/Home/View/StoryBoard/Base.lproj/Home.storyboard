@@ -37,6 +37,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="characterButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="0G1-9s-YCp"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weQ-KS-J5a">
                                         <rect key="frame" x="0.0" y="100" width="180" height="66"/>
@@ -52,6 +55,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="locationButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="zvI-cr-GSE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFV-rl-dQs">
                                         <rect key="frame" x="0.0" y="200" width="180" height="66"/>
@@ -67,6 +73,9 @@
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="episodeButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="h7W-0h-1CE"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -82,6 +91,11 @@
                             <constraint firstItem="tg9-T1-hpK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="re9-Dm-LAo"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="charactersButton" destination="thM-5q-O6o" id="lHG-hb-Aun"/>
+                        <outlet property="episodesButton" destination="kFV-rl-dQs" id="CiI-OJ-FSB"/>
+                        <outlet property="locationsButton" destination="weQ-KS-J5a" id="CCc-O0-6ls"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
