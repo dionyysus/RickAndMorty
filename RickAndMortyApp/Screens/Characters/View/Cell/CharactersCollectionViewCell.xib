@@ -85,10 +85,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="GVe-GD-THt" firstAttribute="leading" secondItem="LAU-7R-0lz" secondAttribute="leading" constant="15" id="15v-kp-Mbj"/>
-                            <constraint firstItem="GVe-GD-THt" firstAttribute="top" secondItem="LAU-7R-0lz" secondAttribute="top" constant="15" id="WZO-0X-t3e"/>
-                            <constraint firstAttribute="trailing" secondItem="GVe-GD-THt" secondAttribute="trailing" constant="15" id="fyu-KW-BQw"/>
-                            <constraint firstAttribute="bottom" secondItem="GVe-GD-THt" secondAttribute="bottom" constant="15" id="rlD-Mi-u1a"/>
+                            <constraint firstItem="GVe-GD-THt" firstAttribute="leading" secondItem="LAU-7R-0lz" secondAttribute="leading" constant="15" id="Dt6-wt-Ths"/>
+                            <constraint firstAttribute="bottom" secondItem="GVe-GD-THt" secondAttribute="bottom" constant="15" id="cro-Pl-mrn"/>
+                            <constraint firstItem="GVe-GD-THt" firstAttribute="top" secondItem="LAU-7R-0lz" secondAttribute="top" constant="15" id="obQ-3K-c13"/>
+                            <constraint firstAttribute="trailing" secondItem="GVe-GD-THt" secondAttribute="trailing" constant="15" id="w3g-fY-Kgs"/>
                         </constraints>
                     </view>
                 </subviews>
