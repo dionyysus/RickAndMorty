@@ -16,10 +16,10 @@ class CharactersViewController: UIViewController {
         
         let nib = UINib(nibName: CharactersCollectionViewCell.identifier, bundle: nil)
         charactersCollectionView.register(nib, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
-
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
         
+        navigationController?.navigationBar.topItem?.backButtonTitle = "Back"
     }
     
 }
