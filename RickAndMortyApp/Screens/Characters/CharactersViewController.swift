@@ -46,8 +46,15 @@ extension CharactersViewController: UICollectionViewDataSource {
         cell.characterView.layer.shadowRadius = 1
         cell.characterView.layer.borderWidth = 1
         cell.characterView.layer.borderColor = UIColor.lightGray.cgColor
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let storyBoard = UIStoryboard(name: "Detail", bundle: nil)
+        let gotoDetailController = storyBoard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        navigationController?.pushViewController(gotoDetailController, animated: true)
+        return
     }
 }
 
@@ -73,3 +80,5 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout{
         return 10.0
     }
 }
+
+
