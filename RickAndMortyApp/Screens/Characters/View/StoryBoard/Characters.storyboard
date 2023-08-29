@@ -41,39 +41,33 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l5d-AV-bbW">
                                 <rect key="frame" x="10" y="103" width="373" height="60"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fAV-eF-E0J">
-                                        <rect key="frame" x="38" y="10" width="297" height="40"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter" translatesAutoresizingMaskIntoConstraints="NO" id="vmK-fB-Skm">
-                                        <rect key="frame" x="340" y="18" width="25" height="25"/>
-                                        <color key="tintColor" red="0.10237783938646317" green="0.087831743061542511" blue="0.027921875938773155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="33G-Rn-WhQ"/>
-                                            <constraint firstAttribute="height" constant="25" id="Rpb-xQ-aMg"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search" translatesAutoresizingMaskIntoConstraints="NO" id="X44-J7-mCZ">
-                                        <rect key="frame" x="8" y="18" width="25" height="25"/>
-                                        <color key="tintColor" red="0.10237783938646317" green="0.087831743061542511" blue="0.027921875938773155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="YLJ-kd-GbP"/>
-                                            <constraint firstAttribute="width" constant="25" id="fJL-tL-QQE"/>
-                                        </constraints>
-                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="2Pl-J5-8gu">
+                                        <rect key="frame" x="8" y="8" width="357" height="56"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="LvQ-gv-kIb">
+                                                <rect key="frame" x="0.0" y="0.0" width="327" height="56"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="p8r-Bk-C4o"/>
+                                                </connections>
+                                            </searchBar>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter" translatesAutoresizingMaskIntoConstraints="NO" id="vmK-fB-Skm">
+                                                <rect key="frame" x="332" y="15.666666666666671" width="25" height="25"/>
+                                                <color key="tintColor" red="0.10237783938646317" green="0.087831743061542511" blue="0.027921875938773155" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="25" id="33G-Rn-WhQ"/>
+                                                    <constraint firstAttribute="height" constant="25" id="Rpb-xQ-aMg"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="fAV-eF-E0J" firstAttribute="leading" secondItem="X44-J7-mCZ" secondAttribute="trailing" constant="5" id="3Ps-L7-dPV"/>
-                                    <constraint firstItem="vmK-fB-Skm" firstAttribute="top" secondItem="l5d-AV-bbW" secondAttribute="top" constant="18" id="3d6-7g-8Px"/>
-                                    <constraint firstItem="X44-J7-mCZ" firstAttribute="leading" secondItem="l5d-AV-bbW" secondAttribute="leading" constant="8" id="JxH-Yw-CIX"/>
                                     <constraint firstAttribute="height" constant="60" id="KIF-oG-7ZS"/>
-                                    <constraint firstItem="X44-J7-mCZ" firstAttribute="top" secondItem="l5d-AV-bbW" secondAttribute="top" constant="18" id="Q4a-BX-LXJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="fAV-eF-E0J" secondAttribute="bottom" constant="10" id="Uh6-5e-crA"/>
-                                    <constraint firstAttribute="trailing" secondItem="vmK-fB-Skm" secondAttribute="trailing" constant="8" id="dmA-74-S6Z"/>
-                                    <constraint firstItem="vmK-fB-Skm" firstAttribute="leading" secondItem="fAV-eF-E0J" secondAttribute="trailing" constant="5" id="hsk-AQ-QSX"/>
-                                    <constraint firstItem="fAV-eF-E0J" firstAttribute="top" secondItem="l5d-AV-bbW" secondAttribute="top" constant="10" id="yKE-GB-Kx1"/>
+                                    <constraint firstItem="2Pl-J5-8gu" firstAttribute="leading" secondItem="l5d-AV-bbW" secondAttribute="leading" constant="8" id="L5e-D3-daE"/>
+                                    <constraint firstItem="2Pl-J5-8gu" firstAttribute="top" secondItem="l5d-AV-bbW" secondAttribute="top" constant="8" id="UgH-ee-llL"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Pl-J5-8gu" secondAttribute="trailing" constant="8" id="uuC-xE-3gO"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
@@ -122,7 +116,6 @@
     </scenes>
     <resources>
         <image name="filter" width="50" height="50"/>
-        <image name="search" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
