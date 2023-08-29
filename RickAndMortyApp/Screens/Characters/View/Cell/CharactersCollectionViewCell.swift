@@ -11,6 +11,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
 
     static let identifier = "CharactersCollectionViewCell"
     
+    @IBOutlet weak var characterView: UIView!
     @IBOutlet weak var characterImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
@@ -20,5 +21,5 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
     }
-
+    
 }

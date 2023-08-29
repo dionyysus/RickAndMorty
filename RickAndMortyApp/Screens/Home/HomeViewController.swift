@@ -15,13 +15,11 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //charactersButton.addTarget(self, action: #selector(characterButtonTapped), for: .touchUpInside)
     }
    
     @IBAction func characterButtonTapped() {
         let story = UIStoryboard(name: "Characters", bundle: nil)
         let charactersController = story.instantiateViewController(withIdentifier: "CharactersViewController") as! CharactersViewController
-        //self.present(charactersController, animated: true, completion: nil)
         navigationController?.pushViewController(charactersController, animated: true)
     }
     

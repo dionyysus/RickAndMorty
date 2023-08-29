@@ -44,11 +44,11 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="E4A-ti-owE">
                                                 <rect key="frame" x="0.0" y="40" width="144" height="48.666666666666657"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5hY-pq-PLU">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="5hY-pq-PLU">
                                                         <rect key="frame" x="0.0" y="0.0" width="144" height="20.333333333333332"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Species:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp7-PO-NVq">
-                                                                <rect key="frame" x="0.0" y="0.0" width="79.333333333333329" height="20.333333333333332"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="84.333333333333329" height="20.333333333333332"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -61,11 +61,11 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="Nwd-yk-Lz4">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Nwd-yk-Lz4">
                                                         <rect key="frame" x="0.0" y="28.333333333333343" width="144" height="20.333333333333329"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Gender:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WvR-2f-Mnv">
-                                                                <rect key="frame" x="0.0" y="0.0" width="74.666666666666671" height="20.333333333333332"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="83.666666666666671" height="20.333333333333332"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -85,12 +85,12 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="GVe-GD-THt" firstAttribute="leading" secondItem="LAU-7R-0lz" secondAttribute="leading" constant="15" id="Dt6-wt-Ths"/>
-                            <constraint firstAttribute="bottom" secondItem="GVe-GD-THt" secondAttribute="bottom" constant="15" id="cro-Pl-mrn"/>
-                            <constraint firstItem="GVe-GD-THt" firstAttribute="top" secondItem="LAU-7R-0lz" secondAttribute="top" constant="15" id="obQ-3K-c13"/>
-                            <constraint firstAttribute="trailing" secondItem="GVe-GD-THt" secondAttribute="trailing" constant="15" id="w3g-fY-Kgs"/>
+                            <constraint firstAttribute="trailing" secondItem="GVe-GD-THt" secondAttribute="trailing" constant="15" id="1u3-T9-mfA"/>
+                            <constraint firstItem="GVe-GD-THt" firstAttribute="top" secondItem="LAU-7R-0lz" secondAttribute="top" constant="15" id="QMi-Lz-9Uo"/>
+                            <constraint firstAttribute="bottom" secondItem="GVe-GD-THt" secondAttribute="bottom" constant="15" id="d0C-dA-kzP"/>
+                            <constraint firstItem="GVe-GD-THt" firstAttribute="leading" secondItem="LAU-7R-0lz" secondAttribute="leading" constant="15" id="vAN-Oa-dCx"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="20"/>
@@ -108,6 +108,7 @@
             <size key="customSize" width="318" height="163"/>
             <connections>
                 <outlet property="characterImageView" destination="YKv-1t-smh" id="rRs-7H-Ugd"/>
+                <outlet property="characterView" destination="LAU-7R-0lz" id="uW6-b5-mCg"/>
                 <outlet property="genderLabel" destination="vgG-rh-XLo" id="kej-rI-0Fn"/>
                 <outlet property="nameLabel" destination="u78-XH-VEn" id="VDP-rd-jo8"/>
                 <outlet property="speciesLabel" destination="2Lc-7H-HTi" id="gg2-kl-fVp"/>
