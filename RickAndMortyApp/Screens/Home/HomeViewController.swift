@@ -70,6 +70,13 @@ class HomeViewController: UIViewController {
             backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+        
+        charactersButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+    }
+    
+    @objc func didTapButton() {
+        let goToViewController = CharactersViewController()
+        self.navigationController?.pushViewController(goToViewController, animated: true)
     }
     
     func addButtonsToStackview(buttons: [UIButton]) {
