@@ -42,6 +42,7 @@ class HomeViewController: UIViewController {
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
         stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
 
@@ -60,7 +61,6 @@ class HomeViewController: UIViewController {
         view.addSubview(stackView)
         
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

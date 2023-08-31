@@ -8,14 +8,27 @@
 import UIKit
 
 class CharactersCollectionViewCell: UICollectionViewCell {
-
-    static let identifier = "CharactersCollectionViewCell"
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.backgroundColor = .clear
+        stackView.spacing = 10
+        return stackView
+    }()
     
-    @IBOutlet weak var characterView: UIView!
-    @IBOutlet weak var characterImageView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var speciesLabel: UILabel!
-    @IBOutlet weak var genderLabel: UILabel!
+    let characterImageView: UIImageView = {
+        let characterImageView = UIImageView()
+        characterImageView.image = UIImage(named: "LaunchPhoto.png")
+        characterImageView.translatesAutoresizingMaskIntoConstraints = false
+        return characterImageView
+    }()
+    
+    private lazy var nameLabel: UILabel = {
+        let nameLabel = UILabel()
+        nameLabel.text = "Rick Sanchez"
+        return nameLabel
+    }()
     
     override func awakeFromNib() {
         super.awakeFromNib()
