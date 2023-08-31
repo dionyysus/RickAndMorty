@@ -21,6 +21,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Rick Sanchez"
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
     }()
     
@@ -39,6 +40,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
             nameLabel.topAnchor.constraint(equalTo: characterImageView.topAnchor, constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16)
         ])
     }
     
