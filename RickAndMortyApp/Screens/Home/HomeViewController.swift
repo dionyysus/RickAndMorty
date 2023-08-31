@@ -9,37 +9,83 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    private let charactersButton: UIButton = {
+    private lazy var charactersButton: UIButton = {
         let charactersButton = UIButton()
-        charactersButton.backgroundColor = .systemBlue
-        charactersButton.setTitle("My Button", for: .normal)
+        charactersButton.backgroundColor = UIColor(red: 46/255, green: 56/255, blue: 61/255, alpha: 0.7)
+        charactersButton.setTitle("Characters", for: .normal)
+        charactersButton.layer.cornerRadius = 10.0
+        charactersButton.layer.masksToBounds = true
         return charactersButton
     }()
+    
+    private lazy var locationsButton: UIButton = {
+        let locationsButton = UIButton()
+        locationsButton.backgroundColor = UIColor(red: 46/255, green: 56/255, blue: 61/255, alpha: 0.7)
+        locationsButton.setTitle("Locations", for: .normal)
+        locationsButton.layer.cornerRadius = 10.0
+        locationsButton.layer.masksToBounds = true
+        return locationsButton
+    }()
+    
+    private lazy var episodesButton: UIButton = {
+        let episodesButton = UIButton()
+        episodesButton.backgroundColor = UIColor(red: 46/255, green: 56/255, blue: 61/255, alpha: 0.7)
+        episodesButton.setTitle("Episodes", for: .normal)
+        episodesButton.layer.cornerRadius = 10.0
+        episodesButton.layer.masksToBounds = true
+        return episodesButton
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.backgroundColor = .clear
+        stackView.spacing = 10
+        return stackView
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addSubview(charactersButton)
-        charactersButton.translatesAutoresizingMaskIntoConstraints = false
+        let buttons = [charactersButton, locationsButton, episodesButton]
+        addButtonsToStackview(buttons: buttons)
+        setButtonConstraints(buttons: buttons)
+        
+        let backgroundImage = UIImageView(image: UIImage(named: "home.png"))
+        backgroundImage.contentMode = .scaleAspectFill
+        
+        view.addSubview(backgroundImage)
+        view.addSubview(stackView)
+        
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            charactersButton.topAnchor.constraint(equalTo: self.view.layoutMarginsGuide.topAnchor),
-            charactersButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            charactersButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            charactersButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
+    }
+    
+    func addButtonsToStackview(buttons: [UIButton]) {
+        for button in buttons {
+            stackView.addArrangedSubview(button)
+        }
+    }
+    
+    func setButtonConstraints(buttons: [UIButton]) {
         
-        if let backgroundImage = UIImage(named: "home.png") {
-            let background = UIView()
-            background.translatesAutoresizingMaskIntoConstraints = false
-            background.backgroundColor = UIColor(patternImage: backgroundImage)
-            view.addSubview(background)
-            
-            let imageSize = backgroundImage.size
-            background.frame = CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height)
-            
-            background.center = view.center
+        for button in buttons {
+            button.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                button.widthAnchor.constraint(equalToConstant: 160),
+                button.heightAnchor.constraint(equalToConstant: 50)
+            ])
         }
     }
 }
