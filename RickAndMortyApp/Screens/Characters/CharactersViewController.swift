@@ -9,8 +9,7 @@ import UIKit
 
 final class CharactersViewController: UIViewController {
 
-    private let searchBar = UISearchBar()
-
+    
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -18,7 +17,9 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return charactersCollectionView
     }()
-        
+    
+    let searchBar = UISearchBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,10 +31,11 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
         
-    
+       
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Characters"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
+        
     }
     
     @objc func handleShowSearchBar() {
@@ -42,9 +44,11 @@ final class CharactersViewController: UIViewController {
     }
     
     func setupConstraints() {
+        
         searchBar.sizeToFit()
-    
+
         NSLayoutConstraint.activate([
+            
             charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -84,7 +88,7 @@ extension CharactersViewController: UICollectionViewDelegate {
 extension CharactersViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 5.0, left: 12.0, bottom: 5.0, right: 12.0)
+        return UIEdgeInsets(top: 5.0, left: 15.0, bottom: 5.0, right: 15.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
