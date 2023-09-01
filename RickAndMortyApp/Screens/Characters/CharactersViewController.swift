@@ -69,18 +69,18 @@ extension CharactersViewController: UICollectionViewDelegate {
 extension CharactersViewController: UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 1.0, left: 1.0, bottom: 1.0, right: 1.0)
+        return UIEdgeInsets(top: 8.0, left: 10.0, bottom: 8.0, right: 10.0)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.size.width / 2
-        let height = collectionView.frame.size.height
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: 150)
+        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return 5
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return 5
     }
 }
 

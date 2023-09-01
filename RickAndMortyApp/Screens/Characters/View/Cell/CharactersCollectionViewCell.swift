@@ -15,13 +15,15 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         let characterImageView = UIImageView()
         characterImageView.image = UIImage(named: "LaunchPhoto.png")
         characterImageView.translatesAutoresizingMaskIntoConstraints = false
+        characterImageView.contentMode = .scaleAspectFill
         return characterImageView
     }()
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Rick Sanchez"
-        nameLabel.textColor = .white
+        nameLabel.textColor = .black
+        nameLabel.textAlignment = .center
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
     }()
@@ -32,16 +34,16 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
-            characterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            characterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            characterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+            characterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            characterImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
+            characterImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             characterImageView.widthAnchor.constraint(equalToConstant: 80),
             characterImageView.heightAnchor.constraint(equalToConstant: 80),
             
-            nameLabel.topAnchor.constraint(equalTo: characterImageView.topAnchor, constant: 8),
-            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
-            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16)
+            nameLabel.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
