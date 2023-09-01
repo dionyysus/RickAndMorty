@@ -16,7 +16,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         characterImageView.image = UIImage(named: "LaunchPhoto.png")
         characterImageView.translatesAutoresizingMaskIntoConstraints = false
         characterImageView.contentMode = .scaleAspectFill
-        characterImageView.layer.borderWidth = 1.0
+        characterImageView.layer.borderWidth = 2.0
         characterImageView.layer.cornerRadius = 20.0
         characterImageView.layer.masksToBounds = true
         characterImageView.layer.borderColor = UIColor.lightGray.cgColor
@@ -39,9 +39,9 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
         NSLayoutConstraint.activate([
             
-            characterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            characterImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
-            characterImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            characterImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            characterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            characterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
