@@ -25,7 +25,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         stackView.axis = .horizontal
         stackView.alignment = .center
         stackView.spacing = 3
