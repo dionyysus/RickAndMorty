@@ -8,7 +8,6 @@
 import UIKit
 
 final class CharactersViewController: UIViewController {
-
     
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -55,6 +54,11 @@ final class CharactersViewController: UIViewController {
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
+    
+    @objc func gotoViewControllerButton() {
+        let goToViewController = DetailViewController()
+        self.navigationController?.pushViewController(goToViewController, animated: true)
+    }
 }
 
 //MARK: Collection View Data Source
@@ -70,13 +74,9 @@ extension CharactersViewController: UICollectionViewDataSource {
         return cell
     }
     
-    //TODO: update it with programmatic ui
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let storyBoard = UIStoryboard(name: "Detail", bundle: nil)
-        let gotoDetailController = storyBoard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        navigationController?.pushViewController(gotoDetailController, animated: true)
-        return
+        let detailViewController = DetailViewController()
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
