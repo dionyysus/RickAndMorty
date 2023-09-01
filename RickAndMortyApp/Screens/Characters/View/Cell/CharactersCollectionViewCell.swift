@@ -11,16 +11,23 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CharactersCollectionViewCell"
     
-    let characterImageView: UIImageView = {
+    private let characterImageView: UIImageView = {
         let characterImageView = UIImageView()
         characterImageView.image = UIImage(named: "LaunchPhoto.png")
         characterImageView.translatesAutoresizingMaskIntoConstraints = false
+        characterImageView.contentMode = .scaleAspectFill
+        characterImageView.layer.borderWidth = 1.0
+        characterImageView.layer.cornerRadius = 20.0
+        characterImageView.layer.masksToBounds = true
+        characterImageView.layer.borderColor = UIColor.lightGray.cgColor
         return characterImageView
     }()
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Rick Sanchez"
+        nameLabel.textColor = .black
+        nameLabel.textAlignment = .center
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
     }()
@@ -29,23 +36,21 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         super.init(frame: .zero)
         contentView.addSubview(characterImageView)
         contentView.addSubview(nameLabel)
-        
+    
         NSLayoutConstraint.activate([
-            characterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            characterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            characterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
-            characterImageView.widthAnchor.constraint(equalToConstant: 80),
-            characterImageView.heightAnchor.constraint(equalToConstant: 80),
+            characterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            characterImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
+            characterImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             
-            nameLabel.topAnchor.constraint(equalTo: characterImageView.topAnchor, constant: 8),
-            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
-            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16)
+            nameLabel.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("erroor")
     }
-        
 }
