@@ -11,12 +11,12 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CharactersCollectionViewCell"
     
-    private let characterImageView: UIImageView = {
+    let characterImageView: UIImageView = {
         let characterImageView = UIImageView()
         characterImageView.image = UIImage(named: "LaunchPhoto.png")
         characterImageView.translatesAutoresizingMaskIntoConstraints = false
         characterImageView.contentMode = .scaleAspectFill
-        characterImageView.layer.borderWidth = 1.0
+        characterImageView.layer.borderWidth = 2.0
         characterImageView.layer.cornerRadius = 20.0
         characterImageView.layer.masksToBounds = true
         characterImageView.layer.borderColor = UIColor.lightGray.cgColor
@@ -36,7 +36,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         super.init(frame: .zero)
         contentView.addSubview(characterImageView)
         contentView.addSubview(nameLabel)
-    
+        
         NSLayoutConstraint.activate([
             
             characterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
