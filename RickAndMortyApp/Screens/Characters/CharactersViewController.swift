@@ -23,14 +23,13 @@ class CharactersViewController: UIViewController {
             view.addSubview(collectionView)
         }
         
-        navigationController?.navigationBar.topItem?.backButtonTitle = "Back"
-
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         charactersCollectionView?.setCollectionViewLayout(layout, animated: true)
-
+        
+        navigationController?.navigationBar.topItem?.backButtonTitle = "Back"
     }
 }
 
