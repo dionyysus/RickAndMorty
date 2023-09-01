@@ -8,29 +8,32 @@
 import UIKit
 
 class CharactersViewController: UIViewController {
+    
+    private let charactersCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
+        return charactersCollectionView
+    }()
 
-    var charactersCollectionView: UICollectionView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        
-        charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        guard let collectionView = charactersCollectionView else {
-            return
-        }
-        
-        charactersCollectionView?.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
-        charactersCollectionView?.delegate = self
-        charactersCollectionView?.dataSource = self
-        charactersCollectionView?.frame = view.bounds
-        view.addSubview(collectionView)
-        
+        view.addSubview(charactersCollectionView)
+
+        charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+           
+        charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
+        charactersCollectionView.delegate = self
+        charactersCollectionView.dataSource = self
+        charactersCollectionView.frame = view.bounds
+          
         navigationController?.navigationBar.topItem?.backButtonTitle = "Back"
     }
 }
@@ -69,9 +72,9 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout{
         return UIEdgeInsets(top: 1.0, left: 1.0, bottom: 1.0, right: 1.0)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let gridLayout = collectionViewLayout as! UICollectionViewFlowLayout
-        let widthPerItem = collectionView.frame.width / 1 - gridLayout.minimumInteritemSpacing
-        return CGSize(width:widthPerItem, height:130)
+        let width = collectionView.frame.size.width / 2
+        let height = collectionView.frame.size.height
+        return CGSize(width: width, height: height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10.0

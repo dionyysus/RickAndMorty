@@ -35,8 +35,8 @@ class CharactersCollectionViewCell: UICollectionViewCell {
             characterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             characterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             characterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
-            characterImageView.widthAnchor.constraint(equalToConstant: 500),
-            characterImageView.heightAnchor.constraint(equalToConstant: 300),
+            characterImageView.widthAnchor.constraint(equalToConstant: 80),
+            characterImageView.heightAnchor.constraint(equalToConstant: 80),
             
             nameLabel.topAnchor.constraint(equalTo: characterImageView.topAnchor, constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
