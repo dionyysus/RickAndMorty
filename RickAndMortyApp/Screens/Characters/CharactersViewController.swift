@@ -7,20 +7,19 @@
 
 import UIKit
 
-final class Layout: UICollectionViewFlowLayout {
-//    override func prepare() {
-//        super.prepare()
-//        itemSize = CGSize(width: 300, height: 150)
-//        minimumInteritemSpacing = 10 // Yatay boşluk
-//           minimumLineSpacing = 10 // Dikey boşluk
-//    }
-//    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-//        guard let collectionView = collectionView else { return false }
-//        return !newBounds.size.equalTo(collectionView.bounds.size)
-//    }
-}
-
 final class CharactersViewController: UIViewController {
+    
+    private lazy var titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.text = "Characters"
+        titleLabel.textColor = .black
+        titleLabel.textAlignment = .center
+        titleLabel.backgroundColor = .systemPink
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        titleLabel.numberOfLines = 0
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        return titleLabel
+    }()
     
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,25 +27,36 @@ final class CharactersViewController: UIViewController {
         let charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return charactersCollectionView
-        
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(titleLabel)
         view.addSubview(charactersCollectionView)
-        charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        setupConstraints()
         
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
-        charactersCollectionView.frame = view.bounds
-          
-        navigationController?.navigationBar.topItem?.backButtonTitle = "Back"
     }
+    
+    func setupConstraints() {
+           
+           NSLayoutConstraint.activate([
+
+               titleLabel.topAnchor.constraint(equalTo: view.topAnchor),
+               titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+               titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+               
+               charactersCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+               charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+               charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+               charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+           ])
+       }
+   
 }
 
 //MARK: Collection View Data Source

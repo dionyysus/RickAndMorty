@@ -38,6 +38,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
     
         NSLayoutConstraint.activate([
+            
             characterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             characterImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
             characterImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
