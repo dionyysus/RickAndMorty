@@ -21,7 +21,6 @@ final class CharactersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(charactersCollectionView)
         
         setupConstraints()
@@ -47,7 +46,6 @@ final class CharactersViewController: UIViewController {
         searchBar.sizeToFit()
 
         NSLayoutConstraint.activate([
-            
             charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
