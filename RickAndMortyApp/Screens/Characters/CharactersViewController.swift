@@ -7,28 +7,39 @@
 
 import UIKit
 
-class CharactersViewController: UIViewController {
+final class Layout: UICollectionViewFlowLayout {
+//    override func prepare() {
+//        super.prepare()
+//        itemSize = CGSize(width: 300, height: 150)
+//        minimumInteritemSpacing = 10 // Yatay boşluk
+//           minimumLineSpacing = 10 // Dikey boşluk
+//    }
+//    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+//        guard let collectionView = collectionView else { return false }
+//        return !newBounds.size.equalTo(collectionView.bounds.size)
+//    }
+}
+
+final class CharactersViewController: UIViewController {
     
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         return charactersCollectionView
+        
     }()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.addSubview(charactersCollectionView)
-
+        charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-           
+        
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
@@ -41,7 +52,7 @@ class CharactersViewController: UIViewController {
 //MARK: Collection View Data Source
 extension CharactersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 10
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,21 +78,22 @@ extension CharactersViewController: UICollectionViewDelegate {
 }
 
 extension CharactersViewController: UICollectionViewDelegateFlowLayout{
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8.0, left: 10.0, bottom: 8.0, right: 10.0)
-    }
+            return UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.size.width / 2
-        return CGSize(width: width, height: 150)
-        
-    }
+        return CGSize(width: view.frame.width/2 - 20, height: 250)
+       }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
-    }
+            return 0
+        }
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 0
+        }
 }
+
 
 
