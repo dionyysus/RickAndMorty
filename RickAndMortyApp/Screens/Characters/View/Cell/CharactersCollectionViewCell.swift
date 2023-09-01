@@ -23,6 +23,16 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return characterImageView
     }()
     
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 3
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Rick Sanchez"
@@ -32,10 +42,22 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return nameLabel
     }()
     
+    private lazy var statusLabel: UILabel = {
+        let statusLabel = UILabel()
+        statusLabel.text = "Alive"
+        statusLabel.textColor = .black
+        statusLabel.textAlignment = .center
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        return statusLabel
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.addSubview(characterImageView)
-        contentView.addSubview(nameLabel)
+        contentView.addSubview(stackView)
+        
+        stackView.addArrangedSubview(nameLabel)
+        stackView.addArrangedSubview(statusLabel)
         
         NSLayoutConstraint.activate([
             
@@ -43,12 +65,11 @@ class CharactersCollectionViewCell: UICollectionViewCell {
             characterImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
             characterImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             
-            nameLabel.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
-            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            stackView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
-        
     }
     
     required init?(coder: NSCoder) {

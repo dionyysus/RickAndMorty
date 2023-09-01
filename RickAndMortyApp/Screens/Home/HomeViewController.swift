@@ -45,7 +45,6 @@ class HomeViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
