@@ -39,21 +39,32 @@ class DetailViewController: UIViewController {
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.axis = .vertical
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
-        stackView.spacing = 10
+        stackView.axis = .horizontal // Yatay düzlemde sıralama
+        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
+    private lazy var stackViewImageAndLabel: UIStackView = {
+        let stackViewImageAndLabel = UIStackView()
+        stackViewImageAndLabel.distribution = .equalSpacing
+        stackViewImageAndLabel.backgroundColor = .clear
+        stackViewImageAndLabel.axis = .horizontal
+        stackViewImageAndLabel.alignment = .center // İçerikleri merkeze hizala
+        stackViewImageAndLabel.spacing = 3
+        stackViewImageAndLabel.translatesAutoresizingMaskIntoConstraints = false
+        return stackViewImageAndLabel
+    }()
+    
     private let statusImageView: UIImageView = {
         let statusImageView = UIImageView()
-        statusImageView.image = UIImage(named: "LaunchPhoto.png")
+        statusImageView.image = UIImage(named: "greenCircle.png")
+        statusImageView.widthAnchor.constraint(equalToConstant: 25).isActive = true
+        statusImageView.heightAnchor.constraint(equalToConstant: 25).isActive = true
         statusImageView.translatesAutoresizingMaskIntoConstraints = false
-        statusImageView.contentMode = .scaleAspectFill
-        statusImageView.layer.cornerRadius = 15.0
-        statusImageView.layer.masksToBounds = true
         return statusImageView
     }()
     
@@ -61,6 +72,7 @@ class DetailViewController: UIViewController {
         let featureLabel1 = UILabel()
         featureLabel1.text = "Alive"
         featureLabel1.textColor = .black
+        featureLabel1.font = UIFont.systemFont(ofSize: 20.0)
         featureLabel1.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel1
     }()
@@ -69,6 +81,7 @@ class DetailViewController: UIViewController {
         let featureLabel2 = UILabel()
         featureLabel2.text = "Human"
         featureLabel2.textColor = .black
+        featureLabel2.font = UIFont.systemFont(ofSize: 20.0)
         featureLabel2.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel2
     }()
@@ -77,6 +90,7 @@ class DetailViewController: UIViewController {
         let featureLabel3 = UILabel()
         featureLabel3.text = "Male"
         featureLabel3.textColor = .black
+        featureLabel3.font = UIFont.systemFont(ofSize: 20.0)
         featureLabel3.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel3
     }()
@@ -88,10 +102,14 @@ class DetailViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(detailView)
         view.addSubview(stackView)
-        view.addSubview(featureLabel1)
-        view.addSubview(featureLabel2)
-        view.addSubview(featureLabel3)
 
+        stackViewImageAndLabel.addArrangedSubview(statusImageView)
+        stackViewImageAndLabel.addArrangedSubview(featureLabel1)
+        
+        stackView.addArrangedSubview(stackViewImageAndLabel)
+        stackView.addArrangedSubview(featureLabel2)
+        stackView.addArrangedSubview(featureLabel3)
+        
         NSLayoutConstraint.activate([
             detailImageView.topAnchor.constraint(equalTo: view.topAnchor),
             detailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -106,6 +124,11 @@ class DetailViewController: UIViewController {
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10),
             detailView.heightAnchor.constraint(equalToConstant: 60),
+            
+            stackView.topAnchor.constraint(equalTo: detailView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: detailView.bottomAnchor),
         ])
     }
     
