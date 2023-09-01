@@ -8,19 +8,9 @@
 import UIKit
 
 final class CharactersViewController: UIViewController {
-    
-//    private lazy var titleLabel: UILabel = {
-//        let titleLabel = UILabel()
-//        titleLabel.text = "Characters"
-//        titleLabel.textColor = .black
-//        titleLabel.textAlignment = .center
-//        titleLabel.backgroundColor = .systemPink
-//        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
-//        titleLabel.numberOfLines = 0
-//        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        return titleLabel
-//    }()
-    
+
+    private let searchBar = UISearchBar()
+
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -28,26 +18,34 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return charactersCollectionView
     }()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //view.addSubview(titleLabel)
         view.addSubview(charactersCollectionView)
         
         setupConstraints()
-        
+
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
         
-        self.navigationItem.title = "Characters"
+    
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Characters"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
+    }
+    
+    @objc func handleShowSearchBar() {
+        navigationItem.titleView = searchBar
+        searchBar.placeholder = "Search"
     }
     
     func setupConstraints() {
-        
+        searchBar.sizeToFit()
+    
         NSLayoutConstraint.activate([
-
+            
             charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
