@@ -11,7 +11,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CharactersCollectionViewCell"
     
-    let characterImageView: UIImageView = {
+    private let characterImageView: UIImageView = {
         let characterImageView = UIImageView()
         characterImageView.image = UIImage(named: "LaunchPhoto.png")
         characterImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -21,6 +21,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Rick Sanchez"
+        nameLabel.textColor = .white
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
     }()
@@ -34,8 +35,8 @@ class CharactersCollectionViewCell: UICollectionViewCell {
             characterImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             characterImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             characterImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
-            characterImageView.widthAnchor.constraint(equalToConstant: 80),
-            characterImageView.heightAnchor.constraint(equalToConstant: 80),
+            characterImageView.widthAnchor.constraint(equalToConstant: 500),
+            characterImageView.heightAnchor.constraint(equalToConstant: 300),
             
             nameLabel.topAnchor.constraint(equalTo: characterImageView.topAnchor, constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
@@ -47,5 +48,4 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("erroor")
     }
-        
 }
