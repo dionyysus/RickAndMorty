@@ -239,11 +239,22 @@ class DetailViewController: UIViewController {
 
         titleLabel.text = viewModel?.character?.name
         featureLabel1.text = viewModel?.character?.status?.rawValue
-//        if ((viewModel?.character?.status?.rawValue = "Alive") != nil) {
-//            statusImageView.image = UIImage(named: "greenCircle")
-//        } else {
-//            statusImageView.image = UIImage(named: "redCircle")
-//        }
+        featureLabel2.text = viewModel?.character?.species?.rawValue
+        featureLabel3.text = viewModel?.character?.gender?.rawValue
+        featureLabel4.text = viewModel?.character?.origin?.name
+        featureLabel5.text = viewModel?.character?.location?.name
+        
+        if (viewModel?.character?.status?.rawValue == "Alive") {
+            statusImageView.image = UIImage(named: "greenCircle")
+        } else if(viewModel?.character?.status?.rawValue == "Dead") {
+            statusImageView.image = UIImage(named: "redCircle")
+        } else {
+            statusImageView.image = UIImage(named: "grayCircle")
+        }
+        
+        let imgPosterPath = viewModel?.character?.image ?? ""
+        let imgFullPath = URL(string: "\(imgPosterPath)")
+        detailImageView.loadImg(url: imgFullPath!)
         
         NSLayoutConstraint.activate([
             detailImageView.topAnchor.constraint(equalTo: view.topAnchor),
