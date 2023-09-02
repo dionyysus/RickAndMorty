@@ -32,12 +32,58 @@ class DetailViewController: UIViewController {
     private lazy var detailView: UIView = {
         let detailView = UIView()
         detailView.layer.cornerRadius = 20.0
+        detailView.layer.borderColor = UIColor.lightGray.cgColor
+        detailView.layer.borderWidth = 2.0
         detailView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 0.9)
         detailView.translatesAutoresizingMaskIntoConstraints = false
         return detailView
     }()
     
     private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .equalSpacing
+        stackView.backgroundColor = .clear
+        stackView.axis = .vertical // Yatay düzlemde sıralama
+        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.spacing = 3
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var speciesStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .equalSpacing
+        stackView.backgroundColor = .clear
+        stackView.axis = .horizontal // Yatay düzlemde sıralama
+        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.spacing = 3
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var genderStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .equalSpacing
+        stackView.backgroundColor = .clear
+        stackView.axis = .horizontal // Yatay düzlemde sıralama
+        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.spacing = 3
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var origineStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .equalSpacing
+        stackView.backgroundColor = .clear
+        stackView.axis = .horizontal // Yatay düzlemde sıralama
+        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.spacing = 3
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var locationStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
@@ -68,6 +114,53 @@ class DetailViewController: UIViewController {
         return statusImageView
     }()
     
+    private lazy var statusLabel: UILabel = {
+        let statusLabel = UILabel()
+        statusLabel.text = "Staus: "
+        statusLabel.textColor = .orange
+        statusLabel.textAlignment = .left
+        statusLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        return statusLabel
+    }()
+    
+    private lazy var spesiecLabel: UILabel = {
+        let spesiecLabel = UILabel()
+        spesiecLabel.text = "Species: "
+        spesiecLabel.textColor = .orange
+        spesiecLabel.textAlignment = .left
+        spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        spesiecLabel.translatesAutoresizingMaskIntoConstraints = false
+        return spesiecLabel
+    }()
+    
+    private lazy var genderLabel: UILabel = {
+        let spesiecLabel = UILabel()
+        spesiecLabel.text = "Gender: "
+        spesiecLabel.textColor = .orange
+        spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        spesiecLabel.translatesAutoresizingMaskIntoConstraints = false
+        return spesiecLabel
+    }()
+    
+    private lazy var origineLabel: UILabel = {
+        let spesiecLabel = UILabel()
+        spesiecLabel.text = "Origine: "
+        spesiecLabel.textColor = .orange
+        spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        spesiecLabel.translatesAutoresizingMaskIntoConstraints = false
+        return spesiecLabel
+    }()
+    
+    private lazy var locationLabel: UILabel = {
+        let spesiecLabel = UILabel()
+        spesiecLabel.text = "Location: "
+        spesiecLabel.textColor = .orange
+        spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        spesiecLabel.translatesAutoresizingMaskIntoConstraints = false
+        return spesiecLabel
+    }()
+    
     private lazy var featureLabel1: UILabel = {
         let featureLabel1 = UILabel()
         featureLabel1.text = "Alive"
@@ -94,6 +187,24 @@ class DetailViewController: UIViewController {
         featureLabel3.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel3
     }()
+    
+    private lazy var featureLabel4: UILabel = {
+        let featureLabel3 = UILabel()
+        featureLabel3.text = "Earth"
+        featureLabel3.textColor = .black
+        featureLabel3.font = UIFont.systemFont(ofSize: 20.0)
+        featureLabel3.translatesAutoresizingMaskIntoConstraints = false
+        return featureLabel3
+    }()
+    
+    private lazy var featureLabel5: UILabel = {
+        let featureLabel3 = UILabel()
+        featureLabel3.text = "Earth"
+        featureLabel3.textColor = .black
+        featureLabel3.font = UIFont.systemFont(ofSize: 20.0)
+        featureLabel3.translatesAutoresizingMaskIntoConstraints = false
+        return featureLabel3
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,13 +214,28 @@ class DetailViewController: UIViewController {
         view.addSubview(detailView)
         view.addSubview(stackView)
 
+        stackViewImageAndLabel.addArrangedSubview(statusLabel)
         stackViewImageAndLabel.addArrangedSubview(statusImageView)
         stackViewImageAndLabel.addArrangedSubview(featureLabel1)
+
+        speciesStackView.addArrangedSubview(spesiecLabel)
+        speciesStackView.addArrangedSubview(featureLabel2)
+
+        genderStackView.addArrangedSubview(genderLabel)
+        genderStackView.addArrangedSubview(featureLabel3)
+        
+        origineStackView.addArrangedSubview(origineLabel)
+        origineStackView.addArrangedSubview(featureLabel4)
+        
+        locationStackView.addArrangedSubview(locationLabel)
+        locationStackView.addArrangedSubview(featureLabel5)
         
         stackView.addArrangedSubview(stackViewImageAndLabel)
-        stackView.addArrangedSubview(featureLabel2)
-        stackView.addArrangedSubview(featureLabel3)
-        
+        stackView.addArrangedSubview(speciesStackView)
+        stackView.addArrangedSubview(genderStackView)
+        stackView.addArrangedSubview(origineStackView)
+        stackView.addArrangedSubview(locationStackView)
+
         NSLayoutConstraint.activate([
             detailImageView.topAnchor.constraint(equalTo: view.topAnchor),
             detailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -123,12 +249,12 @@ class DetailViewController: UIViewController {
             detailView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10),
-            detailView.heightAnchor.constraint(equalToConstant: 60),
+            detailView.heightAnchor.constraint(equalToConstant: 300),
             
-            stackView.topAnchor.constraint(equalTo: detailView.topAnchor),
+            stackView.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 16),
             stackView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -20),
-            stackView.bottomAnchor.constraint(equalTo: detailView.bottomAnchor),
+            stackView.bottomAnchor.constraint(equalTo: detailView.bottomAnchor, constant: -16),
         ])
     }
     

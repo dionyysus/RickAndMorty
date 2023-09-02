@@ -26,7 +26,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fillProportionally
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +45,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     private lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.text = "Alive"
-        statusLabel.textColor = .black
+        statusLabel.textColor = .darkGray
         statusLabel.textAlignment = .center
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
@@ -65,7 +65,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
             characterImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
             characterImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             
-            stackView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor, constant: 2),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
