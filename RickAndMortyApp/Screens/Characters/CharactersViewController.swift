@@ -40,12 +40,26 @@ final class CharactersViewController: UIViewController {
        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Characters"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
         
     }
     
+    func showSearchBarButton(shouldShow: Bool) {
+        if shouldShow {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    func search(shouldShow: Bool) {
+        showSearchBarButton(shouldShow: !shouldShow)
+        searchBar.showsCancelButton = shouldShow
+        navigationItem.titleView = shouldShow ? searchBar : nil
+    }
+    
     @objc func handleShowSearchBar() {
-        navigationItem.titleView = searchBar
+        search(shouldShow: true)
+        searchBar.becomeFirstResponder()
         searchBar.placeholder = "Search"
     }
     
@@ -53,13 +67,20 @@ final class CharactersViewController: UIViewController {
         
         searchBar.sizeToFit()
 
+        searchBar.delegate = self
+        
+        showSearchBarButton(shouldShow: true)
+
         NSLayoutConstraint.activate([
             charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+        
     }
+    
+    
     
     @objc func gotoViewControllerButton() {
         let goToViewController = DetailViewController()
@@ -123,5 +144,22 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout{
     }
 }
 
-
+extension CharactersViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print("search bar did begin editing")
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        print("search bar did end editing")
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        search(shouldShow: false)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("search text is \(searchText)")
+    }
+}
 
