@@ -33,7 +33,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    private lazy var nameLabel: UILabel = {
+    var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Rick Sanchez"
         nameLabel.textColor = .black
@@ -42,7 +42,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return nameLabel
     }()
     
-    private lazy var statusLabel: UILabel = {
+   var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.text = "Alive"
         statusLabel.textColor = .darkGray
@@ -74,5 +74,19 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("erroor")
+    }
+}
+
+extension UIImageView {
+    func loadImg(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
     }
 }

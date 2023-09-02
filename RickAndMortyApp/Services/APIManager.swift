@@ -16,13 +16,8 @@ class APIManager {
     
     static let shared = APIManager()
     
-//    private var favoriteMoviesArray: [Movie] = []
-//    private var categoryMoviesArray: [Genre] = []
-//    private var searchedMoviesArray: [Movie] = []
+    var baseURL = "https://rickandmortyapi.com/api/character"
     
-    var baseURL = "https://rickandmortyapi.com/api/"
-    var characterEndPoint = "/character"
-
     private init() { }
    
     func execute<T: Decodable>(url: String, completion: @escaping(T?) -> ()) {

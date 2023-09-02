@@ -9,6 +9,8 @@ import UIKit
 
 final class CharactersViewController: UIViewController {
     
+    private var viewModel: CharacterViewModel?
+    
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -21,6 +23,9 @@ final class CharactersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel = CharacterViewModel(apiManager: APIManager.shared)
+
         view.addSubview(charactersCollectionView)
         
         setupConstraints()
@@ -29,6 +34,9 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
         
+        viewModel?.fetchCharacters { [weak self] in
+            self?.charactersCollectionView.reloadData()
+        }
        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Characters"
@@ -62,18 +70,32 @@ final class CharactersViewController: UIViewController {
 //MARK: Collection View Data Source
 extension CharactersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.characters.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+        let characterFeatures = viewModel?.characters[indexPath.row]
+        
+        cell.nameLabel.text = characterFeatures?.name
+        if let posterPath = characterFeatures?.image,
+           let imgUrl = URL(string: "\(posterPath)") {
+            cell.characterImageView.loadImg(url: imgUrl)
+        }
+        cell.statusLabel.text = characterFeatures?.status?.rawValue
+        
         return cell
     }
-    
+  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
+        let character = viewModel?.characters[indexPath.row]
+        if let selectedCharacter = character {
+            detailViewController.prepare(character: selectedCharacter)
+        }
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
