@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class DetailViewModel{
+    
+    var character: Characters?
+    
+    init(character: Characters) {
+        self.character = character
+    }
+}

@@ -77,20 +77,25 @@ extension CharactersViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
-        let characterFeatures = viewModel?.characters[indexPath.row]
-        cell.nameLabel.text = characterFeatures?.name
         
+        let characterFeatures = viewModel?.characters[indexPath.row]
+        
+        cell.nameLabel.text = characterFeatures?.name
         if let posterPath = characterFeatures?.image,
            let imgUrl = URL(string: "\(posterPath)") {
             cell.characterImageView.loadImg(url: imgUrl)
         }
-
         cell.statusLabel.text = characterFeatures?.status?.rawValue
+        
         return cell
     }
-    
+  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
+        let character = viewModel?.characters[indexPath.row]
+        if let selectedCharacter = character {
+            detailViewController.prepare(character: selectedCharacter)
+        }
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

@@ -9,7 +9,10 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    private let detailImageView: UIImageView = {
+    var characterId: Int? = 0 
+    private var viewModel: DetailViewModel?
+    
+    let detailImageView: UIImageView = {
         let detailImageView = UIImageView()
         detailImageView.image = UIImage(named: "LaunchPhoto.png")
         detailImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +22,7 @@ class DetailViewController: UIViewController {
         return detailImageView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Rick Sanchez"
         titleLabel.textColor = .black
@@ -234,6 +237,14 @@ class DetailViewController: UIViewController {
         stackView.addArrangedSubview(origineStackView)
         stackView.addArrangedSubview(locationStackView)
 
+        titleLabel.text = viewModel?.character?.name
+        featureLabel1.text = viewModel?.character?.status?.rawValue
+//        if ((viewModel?.character?.status?.rawValue = "Alive") != nil) {
+//            statusImageView.image = UIImage(named: "greenCircle")
+//        } else {
+//            statusImageView.image = UIImage(named: "redCircle")
+//        }
+        
         NSLayoutConstraint.activate([
             detailImageView.topAnchor.constraint(equalTo: view.topAnchor),
             detailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -257,5 +268,8 @@ class DetailViewController: UIViewController {
     }
     
     
+    func prepare(character: Characters) {
+        viewModel = DetailViewModel(character: character)
+    }
     
 }
