@@ -9,6 +9,8 @@ import UIKit
 
 final class CharactersViewController: UIViewController {
     
+    private var viewModel: CharacterViewModel?
+    
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -21,6 +23,9 @@ final class CharactersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel = CharacterViewModel(apiManager: APIManager.shared)
+
         view.addSubview(charactersCollectionView)
         
         setupConstraints()
@@ -29,6 +34,9 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
         
+        viewModel?.fetchCharacters { [weak self] in
+            self?.charactersCollectionView.reloadData()
+        }
        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Characters"
@@ -62,13 +70,15 @@ final class CharactersViewController: UIViewController {
 //MARK: Collection View Data Source
 extension CharactersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.characters.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
+        let characterFeatures = viewModel?.characters[indexPath.row]
+        cell.nameLabel.text = characterFeatures?.name
         return cell
     }
     
