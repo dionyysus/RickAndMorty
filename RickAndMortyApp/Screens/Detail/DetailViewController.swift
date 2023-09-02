@@ -34,7 +34,7 @@ class DetailViewController: UIViewController {
         detailView.layer.cornerRadius = 20.0
         detailView.layer.borderColor = UIColor.lightGray.cgColor
         detailView.layer.borderWidth = 2.0
-        detailView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 0.9)
+        detailView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 0.9)
         detailView.translatesAutoresizingMaskIntoConstraints = false
         return detailView
     }()
@@ -44,7 +44,7 @@ class DetailViewController: UIViewController {
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
         stackView.axis = .vertical // Yatay düzlemde sıralama
-        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.alignment = .leading // İçerikleri merkeze hizala
         stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -118,7 +118,6 @@ class DetailViewController: UIViewController {
         let statusLabel = UILabel()
         statusLabel.text = "Staus: "
         statusLabel.textColor = .orange
-        statusLabel.textAlignment = .left
         statusLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
@@ -128,7 +127,6 @@ class DetailViewController: UIViewController {
         let spesiecLabel = UILabel()
         spesiecLabel.text = "Species: "
         spesiecLabel.textColor = .orange
-        spesiecLabel.textAlignment = .left
         spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         spesiecLabel.translatesAutoresizingMaskIntoConstraints = false
         return spesiecLabel
