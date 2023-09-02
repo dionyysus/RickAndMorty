@@ -79,6 +79,13 @@ extension CharactersViewController: UICollectionViewDataSource {
         }
         let characterFeatures = viewModel?.characters[indexPath.row]
         cell.nameLabel.text = characterFeatures?.name
+        
+        if let posterPath = characterFeatures?.image,
+           let imgUrl = URL(string: "\(posterPath)") {
+            cell.characterImageView.loadImg(url: imgUrl)
+        }
+
+        cell.statusLabel.text = characterFeatures?.status?.rawValue
         return cell
     }
     
