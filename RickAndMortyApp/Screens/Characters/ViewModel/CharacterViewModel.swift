@@ -10,6 +10,7 @@ import Foundation
 class CharacterViewModel {
     
     var characters: [Characters] = [] //all characters
+    var filteredCharacters: [Characters] = []
     
     private var apiManager: APIManager?
     

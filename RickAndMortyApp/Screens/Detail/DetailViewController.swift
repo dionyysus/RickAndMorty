@@ -12,7 +12,7 @@ class DetailViewController: UIViewController {
     var characterId: Int? = 0 
     private var viewModel: DetailViewModel?
     
-    let detailImageView: UIImageView = {
+    private lazy var detailImageView: UIImageView = {
         let detailImageView = UIImageView()
         detailImageView.image = UIImage(named: "LaunchPhoto.png")
         detailImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +22,7 @@ class DetailViewController: UIViewController {
         return detailImageView
     }()
     
-    var titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Rick Sanchez"
         titleLabel.textColor = .black
@@ -37,7 +37,7 @@ class DetailViewController: UIViewController {
         detailView.layer.cornerRadius = 20.0
         detailView.layer.borderColor = UIColor.lightGray.cgColor
         detailView.layer.borderWidth = 2.0
-        detailView.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 0.9)
+        detailView.backgroundColor = .white
         detailView.translatesAutoresizingMaskIntoConstraints = false
         return detailView
     }()
