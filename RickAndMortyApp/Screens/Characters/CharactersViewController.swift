@@ -166,11 +166,13 @@ extension CharactersViewController: UISearchBarDelegate {
         
         if trimmedText.isEmpty {
             isSearch = false
-            charactersCollectionView.reloadData()
         } else {
+            isSearch = true
             viewModel?.search(for: searchText)
             charactersCollectionView.reloadData()
         }
+        charactersCollectionView.reloadData()
+
     }
 }
 
