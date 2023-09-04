@@ -73,7 +73,7 @@ final class CharactersViewController: UIViewController {
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-
+    
     @objc func gotoViewControllerButton() {
         let goToViewController = DetailViewController()
         self.navigationController?.pushViewController(goToViewController, animated: true)
@@ -106,23 +106,21 @@ extension CharactersViewController: UICollectionViewDataSource {
             cell.characterImageView.loadImg(url: imgUrl)
         }
         cell.statusLabel.text = characterFeatures.status?.rawValue
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let detailViewController = DetailViewController()
-        let character = viewModel?.characters[indexPath.row]
-        if let selectedCharacter = character {
-            detailViewController.prepare(character: selectedCharacter)
+        if let character = isSearch ? viewModel?.filteredCharacters[indexPath.row] : viewModel?.characters[indexPath.row] {
+            detailViewController.prepare(character: character)
+            navigationController?.pushViewController(detailViewController, animated: true)
         }
-        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
 //MARK: Collection View Delegate
 extension CharactersViewController: UICollectionViewDelegate {
-    
 }
 
 extension CharactersViewController: UICollectionViewDelegateFlowLayout{
@@ -146,35 +144,33 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout{
 extension CharactersViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("search bar did begin editing")
         isSearch = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print("search bar did end editing")
+        isSearch = false
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
         search(shouldShow: false)
         isSearch = false
         charactersCollectionView.reloadData()
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("search text is \(searchText)")
-        
         let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if trimmedText.isEmpty {
-            charactersCollectionView.reloadData()
+            isSearch = false
         } else {
+            isSearch = true
             viewModel?.search(for: searchText)
             charactersCollectionView.reloadData()
         }
+        
+        charactersCollectionView.reloadData()
     }
 }
 

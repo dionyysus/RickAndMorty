@@ -278,9 +278,7 @@ class DetailViewController: UIViewController {
         ])
     }
     
-    
     func prepare(character: Characters) {
         viewModel = DetailViewModel(character: character)
     }
-    
 }
