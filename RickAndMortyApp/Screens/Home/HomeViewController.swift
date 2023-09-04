@@ -55,7 +55,6 @@ class HomeViewController: UIViewController {
         
         let backgroundImage = UIImageView(image: UIImage(named: "home.png"))
         backgroundImage.contentMode = .scaleAspectFill
-        
         view.addSubview(backgroundImage)
         view.addSubview(stackView)
         
@@ -64,17 +63,24 @@ class HomeViewController: UIViewController {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         
-        charactersButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        charactersButton.addTarget(self, action: #selector(didTapCharacterButton), for: .touchUpInside)
+        locationsButton.addTarget(self, action: #selector(didTapLocationButton), for: .touchUpInside)
     }
     
-    @objc func didTapButton() {
+    @objc func didTapCharacterButton() {
         let goToViewController = CharactersViewController()
+        self.navigationController?.pushViewController(goToViewController, animated: true)
+    }
+    
+    @objc func didTapLocationButton() {
+        let goToViewController = LocationViewController()
         self.navigationController?.pushViewController(goToViewController, animated: true)
     }
     

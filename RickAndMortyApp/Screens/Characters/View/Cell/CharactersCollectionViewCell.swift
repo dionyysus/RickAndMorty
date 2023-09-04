@@ -23,52 +23,30 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return characterImageView
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.distribution = .fillProportionally
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.spacing = 3
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Rick Sanchez"
         nameLabel.textColor = .black
         nameLabel.textAlignment = .center
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         return nameLabel
-    }()
-    
-   var statusLabel: UILabel = {
-        let statusLabel = UILabel()
-        statusLabel.text = "Alive"
-        statusLabel.textColor = .darkGray
-        statusLabel.textAlignment = .center
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        return statusLabel
     }()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.addSubview(characterImageView)
-        contentView.addSubview(stackView)
-        
-        stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(statusLabel)
+        contentView.addSubview(nameLabel)
         
         NSLayoutConstraint.activate([
-            
             characterImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             characterImageView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor),
             characterImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             
-            stackView.topAnchor.constraint(equalTo: characterImageView.bottomAnchor, constant: 2),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            nameLabel.topAnchor.constraint(equalTo: characterImageView.bottomAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
     

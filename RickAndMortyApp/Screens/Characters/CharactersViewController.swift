@@ -27,6 +27,7 @@ final class CharactersViewController: UIViewController {
         
         viewModel = CharacterViewModel(apiManager: APIManager.shared)
         view.addSubview(charactersCollectionView)
+        
         setupConstraints()
         
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
@@ -36,7 +37,6 @@ final class CharactersViewController: UIViewController {
         viewModel?.fetchCharacters { [weak self] in
             self?.charactersCollectionView.reloadData()
         }
-        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Characters"
     }
@@ -59,13 +59,13 @@ final class CharactersViewController: UIViewController {
         search(shouldShow: true)
         searchBar.becomeFirstResponder()
         searchBar.placeholder = "Search"
+        
     }
     
     func setupConstraints() {
         searchBar.sizeToFit()
         searchBar.delegate = self
         showSearchBarButton(shouldShow: true)
-        
         NSLayoutConstraint.activate([
             charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -89,7 +89,6 @@ extension CharactersViewController: UICollectionViewDataSource {
         } else{
             return viewModel?.characters.count ?? 0
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -105,7 +104,6 @@ extension CharactersViewController: UICollectionViewDataSource {
            let imgUrl = URL(string: "\(posterPath)") {
             cell.characterImageView.loadImg(url: imgUrl)
         }
-        cell.statusLabel.text = characterFeatures.status?.rawValue
         return cell
     }
     
@@ -130,12 +128,13 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width/2 - 20, height: 250)
+        return CGSize(width: view.frame.width/2 - 20, height: 200)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5.0
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5.0
     }
