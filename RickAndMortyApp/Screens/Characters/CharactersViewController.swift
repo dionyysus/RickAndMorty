@@ -73,7 +73,7 @@ final class CharactersViewController: UIViewController {
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
-
+    
     @objc func gotoViewControllerButton() {
         let goToViewController = DetailViewController()
         self.navigationController?.pushViewController(goToViewController, animated: true)
@@ -146,30 +146,26 @@ extension CharactersViewController: UICollectionViewDelegateFlowLayout{
 extension CharactersViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("search bar did begin editing")
         isSearch = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        print("search bar did end editing")
+        isSearch = false
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
         search(shouldShow: false)
         isSearch = false
         charactersCollectionView.reloadData()
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("search text is \(searchText)")
-        
         let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         
         if trimmedText.isEmpty {
+            isSearch = false
             charactersCollectionView.reloadData()
         } else {
             viewModel?.search(for: searchText)
