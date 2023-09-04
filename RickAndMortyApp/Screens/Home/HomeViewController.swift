@@ -72,6 +72,7 @@ class HomeViewController: UIViewController {
         
         charactersButton.addTarget(self, action: #selector(didTapCharacterButton), for: .touchUpInside)
         locationsButton.addTarget(self, action: #selector(didTapLocationButton), for: .touchUpInside)
+        episodesButton.addTarget(self, action: #selector(didTapEpisodeButton), for: .touchUpInside)
     }
     
     @objc func didTapCharacterButton() {
@@ -81,6 +82,11 @@ class HomeViewController: UIViewController {
     
     @objc func didTapLocationButton() {
         let goToViewController = LocationViewController()
+        self.navigationController?.pushViewController(goToViewController, animated: true)
+    }
+    
+    @objc func didTapEpisodeButton() {
+        let goToViewController = EpisodeViewController()
         self.navigationController?.pushViewController(goToViewController, animated: true)
     }
     
