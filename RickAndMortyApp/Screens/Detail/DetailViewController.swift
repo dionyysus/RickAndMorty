@@ -46,8 +46,8 @@ class DetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
-        stackView.axis = .vertical // Yatay düzlemde sıralama
-        stackView.alignment = .leading // İçerikleri merkeze hizala
+        stackView.axis = .vertical
+        stackView.alignment = .leading
         stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -57,8 +57,8 @@ class DetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
-        stackView.axis = .horizontal // Yatay düzlemde sıralama
-        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.axis = .horizontal
+        stackView.alignment = .center
         stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -68,8 +68,8 @@ class DetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
-        stackView.axis = .horizontal // Yatay düzlemde sıralama
-        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.axis = .horizontal
+        stackView.alignment = .center
         stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -79,8 +79,8 @@ class DetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
-        stackView.axis = .horizontal // Yatay düzlemde sıralama
-        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.axis = .horizontal
+        stackView.alignment = .center
         stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -102,7 +102,7 @@ class DetailViewController: UIViewController {
         stackViewImageAndLabel.distribution = .equalSpacing
         stackViewImageAndLabel.backgroundColor = .clear
         stackViewImageAndLabel.axis = .horizontal
-        stackViewImageAndLabel.alignment = .center // İçerikleri merkeze hizala
+        stackViewImageAndLabel.alignment = .center
         stackViewImageAndLabel.spacing = 3
         stackViewImageAndLabel.translatesAutoresizingMaskIntoConstraints = false
         return stackViewImageAndLabel
@@ -209,7 +209,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         view.addSubview(detailImageView)
         view.addSubview(titleLabel)
         view.addSubview(detailView)
