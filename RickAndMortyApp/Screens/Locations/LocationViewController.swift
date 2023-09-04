@@ -62,7 +62,7 @@ extension LocationViewController: UICollectionViewDelegate {
 extension LocationViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 3.0, left: 15.0, bottom: 3.0, right: 15.0) // Sağdan ve soldan 15 piksel boşluk ekler
+        return UIEdgeInsets(top: 3.0, left: 15.0, bottom: 3.0, right: 15.0) 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

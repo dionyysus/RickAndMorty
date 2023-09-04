@@ -39,7 +39,7 @@ class LocationsCollectionViewCell: UICollectionViewCell {
     var typeLabel: UILabel = {
         let typeLabel = UILabel()
         typeLabel.text = "Type: "
-        typeLabel.textColor = .systemPink
+        typeLabel.textColor = .blue
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         return typeLabel
     }()
@@ -55,7 +55,7 @@ class LocationsCollectionViewCell: UICollectionViewCell {
     var dimensionLabel: UILabel = {
         let dimensionLabel = UILabel()
         dimensionLabel.text = "Dimension: "
-        dimensionLabel.textColor = .systemPink
+        dimensionLabel.textColor = .blue
         dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
         return dimensionLabel
     }()
