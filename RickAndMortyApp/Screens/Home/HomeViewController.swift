@@ -55,7 +55,6 @@ class HomeViewController: UIViewController {
         
         let backgroundImage = UIImageView(image: UIImage(named: "home.png"))
         backgroundImage.contentMode = .scaleAspectFill
-        
         view.addSubview(backgroundImage)
         view.addSubview(stackView)
         
@@ -64,6 +63,7 @@ class HomeViewController: UIViewController {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),

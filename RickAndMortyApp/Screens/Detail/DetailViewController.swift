@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
     var characterId: Int? = 0 
     private var viewModel: DetailViewModel?
     
@@ -90,8 +90,8 @@ class DetailViewController: UIViewController {
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
-        stackView.axis = .horizontal // Yatay düzlemde sıralama
-        stackView.alignment = .center // İçerikleri merkeze hizala
+        stackView.axis = .horizontal
+        stackView.alignment = .center 
         stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -179,7 +179,7 @@ class DetailViewController: UIViewController {
         featureLabel2.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel2
     }()
-
+    
     private lazy var featureLabel3: UILabel = {
         let featureLabel3 = UILabel()
         featureLabel3.text = "Male"
@@ -206,7 +206,7 @@ class DetailViewController: UIViewController {
         featureLabel3.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel3
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -214,14 +214,14 @@ class DetailViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(detailView)
         view.addSubview(stackView)
-
+        
         stackViewImageAndLabel.addArrangedSubview(statusLabel)
         stackViewImageAndLabel.addArrangedSubview(statusImageView)
         stackViewImageAndLabel.addArrangedSubview(featureLabel1)
-
+        
         speciesStackView.addArrangedSubview(spesiecLabel)
         speciesStackView.addArrangedSubview(featureLabel2)
-
+        
         genderStackView.addArrangedSubview(genderLabel)
         genderStackView.addArrangedSubview(featureLabel3)
         
@@ -236,7 +236,7 @@ class DetailViewController: UIViewController {
         stackView.addArrangedSubview(genderStackView)
         stackView.addArrangedSubview(origineStackView)
         stackView.addArrangedSubview(locationStackView)
-
+        
         titleLabel.text = viewModel?.character?.name
         featureLabel1.text = viewModel?.character?.status?.rawValue
         featureLabel2.text = viewModel?.character?.species?.rawValue
