@@ -26,4 +26,11 @@ class CharacterViewModel {
             }
         }
     }
+    
+    func search(for query: String) {
+        filteredCharacters = characters.filter { character in
+            return character.name?.lowercased().contains(query.lowercased()) ?? false
+        }
+    }
+
 }

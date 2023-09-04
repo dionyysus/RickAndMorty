@@ -10,6 +10,7 @@ import UIKit
 final class CharactersViewController: UIViewController {
     
     private var viewModel: CharacterViewModel?
+    var isSearch : Bool = false
     
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -25,11 +26,9 @@ final class CharactersViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel = CharacterViewModel(apiManager: APIManager.shared)
-
         view.addSubview(charactersCollectionView)
-        
         setupConstraints()
-
+        
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
@@ -37,10 +36,9 @@ final class CharactersViewController: UIViewController {
         viewModel?.fetchCharacters { [weak self] in
             self?.charactersCollectionView.reloadData()
         }
-       
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Characters"
-        
     }
     
     func showSearchBarButton(shouldShow: Bool) {
@@ -64,24 +62,18 @@ final class CharactersViewController: UIViewController {
     }
     
     func setupConstraints() {
-        
         searchBar.sizeToFit()
-
         searchBar.delegate = self
-        
         showSearchBarButton(shouldShow: true)
-
+        
         NSLayoutConstraint.activate([
             charactersCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
-        
     }
-    
-    
-    
+
     @objc func gotoViewControllerButton() {
         let goToViewController = DetailViewController()
         self.navigationController?.pushViewController(goToViewController, animated: true)
@@ -91,26 +83,33 @@ final class CharactersViewController: UIViewController {
 //MARK: Collection View Data Source
 extension CharactersViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.characters.count ?? 0
+        
+        if isSearch{
+            return viewModel?.filteredCharacters.count ?? 0
+        } else{
+            return viewModel?.characters.count ?? 0
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
+        guard let characterFeatures = isSearch ? viewModel?.filteredCharacters[indexPath.row] : viewModel?.characters[indexPath.row] else {
+            return UICollectionViewCell()
+        }
         
-        let characterFeatures = viewModel?.characters[indexPath.row]
-        
-        cell.nameLabel.text = characterFeatures?.name
-        if let posterPath = characterFeatures?.image,
+        cell.nameLabel.text = characterFeatures.name
+        if let posterPath = characterFeatures.image,
            let imgUrl = URL(string: "\(posterPath)") {
             cell.characterImageView.loadImg(url: imgUrl)
         }
-        cell.statusLabel.text = characterFeatures?.status?.rawValue
+        cell.statusLabel.text = characterFeatures.status?.rawValue
         
         return cell
     }
-  
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
         let character = viewModel?.characters[indexPath.row]
@@ -148,6 +147,7 @@ extension CharactersViewController: UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("search bar did begin editing")
+        isSearch = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -156,10 +156,25 @@ extension CharactersViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         search(shouldShow: false)
+        isSearch = false
+        charactersCollectionView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("search text is \(searchText)")
+        
+        let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if trimmedText.isEmpty {
+            charactersCollectionView.reloadData()
+        } else {
+            viewModel?.search(for: searchText)
+            charactersCollectionView.reloadData()
+        }
     }
 }
 
