@@ -19,7 +19,7 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         characterImageView.layer.borderWidth = 2.0
         characterImageView.layer.cornerRadius = 20.0
         characterImageView.layer.masksToBounds = true
-        characterImageView.layer.borderColor = UIColor.lightGray.cgColor
+        characterImageView.layer.borderColor = UIColor.systemYellow.cgColor
         return characterImageView
     }()
     

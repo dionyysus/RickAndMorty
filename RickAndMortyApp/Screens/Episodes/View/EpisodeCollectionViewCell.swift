@@ -109,7 +109,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         contentContainerView.addSubview(stackView)
         
         contentContainerView.layer.borderWidth = 2.0
-        contentContainerView.layer.borderColor = UIColor.lightGray.cgColor
+        contentContainerView.layer.borderColor = UIColor.systemBlue.cgColor
         contentContainerView.layer.cornerRadius = 10.0
         contentContainerView.layer.masksToBounds = true
         
