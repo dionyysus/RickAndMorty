@@ -70,11 +70,17 @@ class HomeViewController: UIViewController {
             backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         
-        charactersButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        charactersButton.addTarget(self, action: #selector(didTapCharacterButton), for: .touchUpInside)
+        locationsButton.addTarget(self, action: #selector(didTapLocationButton), for: .touchUpInside)
     }
     
-    @objc func didTapButton() {
+    @objc func didTapCharacterButton() {
         let goToViewController = CharactersViewController()
+        self.navigationController?.pushViewController(goToViewController, animated: true)
+    }
+    
+    @objc func didTapLocationButton() {
+        let goToViewController = LocationViewController()
         self.navigationController?.pushViewController(goToViewController, animated: true)
     }
     

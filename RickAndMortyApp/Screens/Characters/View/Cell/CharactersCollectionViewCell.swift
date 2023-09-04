@@ -23,16 +23,6 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return characterImageView
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.distribution = .fillProportionally
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.spacing = 3
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Rick Sanchez"
