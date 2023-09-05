@@ -9,6 +9,9 @@ import UIKit
 
 class LocationViewController: UIViewController {
 
+    let searchBar = UISearchBar()
+    var isSearch : Bool = false
+    
     private let locationsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -30,7 +33,32 @@ class LocationViewController: UIViewController {
         navigationItem.title = "Locations"
     }
     
+    func showSearchBarButton(shouldShow: Bool) {
+        if shouldShow {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    func search(shouldShow: Bool) {
+        showSearchBarButton(shouldShow: !shouldShow)
+        searchBar.showsCancelButton = shouldShow
+        navigationItem.titleView = shouldShow ? searchBar : nil
+    }
+    
+    @objc func handleShowSearchBar() {
+        search(shouldShow: true)
+        searchBar.becomeFirstResponder()
+        searchBar.placeholder = "Search"
+        
+    }
+    
     func setupConstraints() {
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        showSearchBarButton(shouldShow: true)
+        
         NSLayoutConstraint.activate([
             locationsCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             locationsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -75,5 +103,38 @@ extension LocationViewController: UICollectionViewDelegateFlowLayout{
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 3.0
+    }
+}
+
+extension LocationViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isSearch = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        isSearch = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        search(shouldShow: false)
+        isSearch = false
+        locationsCollectionView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+//        if trimmedText.isEmpty {
+//            isSearch = false
+//        } else {
+//            isSearch = true
+//            viewModel?.search(for: searchText)
+//            charactersCollectionView.reloadData()
+//        }
+        
+        locationsCollectionView.reloadData()
     }
 }

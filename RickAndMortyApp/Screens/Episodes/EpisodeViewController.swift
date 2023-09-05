@@ -173,7 +173,7 @@ extension EpisodeViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         search(shouldShow: false)
         isSearch = false
-        seasonCollectionView.reloadData()
+        episodeCollectionView.reloadData()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -187,6 +187,6 @@ extension EpisodeViewController: UISearchBarDelegate {
 //            charactersCollectionView.reloadData()
 //        }
         
-        seasonCollectionView.reloadData()
+        episodeCollectionView.reloadData()
     }
 }
