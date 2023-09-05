@@ -150,7 +150,7 @@ extension EpisodeViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == episodeCollectionView {
-            return CGSize(width: view.frame.width, height: 150)
+            return CGSize(width: view.frame.width, height: 120)
         } else {
             return CGSize(width: 120, height: 45)
         }
