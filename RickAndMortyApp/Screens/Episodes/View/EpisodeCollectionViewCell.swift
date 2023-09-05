@@ -17,7 +17,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    let locationImageView: UIImageView = {
+    let episodeImageView: UIImageView = {
         let characterImageView = UIImageView()
         characterImageView.image = UIImage(named: "LaunchPhoto.png")
         characterImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,7 +39,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     var typeLabel: UILabel = {
         let typeLabel = UILabel()
         typeLabel.text = "Type: "
-        typeLabel.textColor = .blue
+        typeLabel.textColor = .black
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         return typeLabel
     }()
@@ -55,7 +55,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     var dimensionLabel: UILabel = {
         let dimensionLabel = UILabel()
         dimensionLabel.text = "Dimension: "
-        dimensionLabel.textColor = .blue
+        dimensionLabel.textColor = .black
         dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
         return dimensionLabel
     }()
@@ -101,15 +101,17 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         return dimensionStackView
     }()
     
+   
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         contentView.addSubview(contentContainerView)
-        contentContainerView.addSubview(locationImageView)
+        contentContainerView.addSubview(episodeImageView)
         contentContainerView.addSubview(stackView)
         
         contentContainerView.layer.borderWidth = 2.0
-        contentContainerView.layer.borderColor = UIColor.lightGray.cgColor
+        contentContainerView.layer.borderColor = UIColor.systemBlue.cgColor
         contentContainerView.layer.cornerRadius = 10.0
         contentContainerView.layer.masksToBounds = true
         
@@ -130,13 +132,13 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
             contentContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             contentContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            locationImageView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 10),
-            locationImageView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
-            locationImageView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
-            locationImageView.widthAnchor.constraint(equalTo: contentContainerView.heightAnchor),
+            episodeImageView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 10),
+            episodeImageView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
+            episodeImageView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
+            episodeImageView.widthAnchor.constraint(equalTo: contentContainerView.heightAnchor),
             
             stackView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: locationImageView.trailingAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: episodeImageView.trailingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor, constant: -10),
             stackView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
         ])

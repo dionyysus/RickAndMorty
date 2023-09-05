@@ -108,7 +108,6 @@ extension CharactersViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let detailViewController = DetailViewController()
         if let character = isSearch ? viewModel?.filteredCharacters[indexPath.row] : viewModel?.characters[indexPath.row] {
             detailViewController.prepare(character: character)
