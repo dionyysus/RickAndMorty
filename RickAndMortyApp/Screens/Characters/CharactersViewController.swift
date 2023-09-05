@@ -10,6 +10,8 @@ import UIKit
 final class CharactersViewController: UIViewController {
     
     private var viewModel: CharacterViewModel?
+    
+    let searchBar = UISearchBar()
     var isSearch : Bool = false
     
     private let charactersCollectionView: UICollectionView = {
@@ -19,9 +21,7 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return charactersCollectionView
     }()
-    
-    let searchBar = UISearchBar()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         

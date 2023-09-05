@@ -13,6 +13,11 @@ struct CharacterResponse: Codable {
     let results: [Characters]?
 }
 
+struct EpisodeResponse: Codable {
+    let info: Info?
+    let results: [Episodes]?
+}
+
 // MARK: - Info
 struct Info: Codable {
     let count, pages: Int?
@@ -34,6 +39,21 @@ struct Characters: Codable {
     let created: String?
 }
 
+struct Episodes: Codable {
+    let id: Int?
+    let name, airDate, episode: String?
+    let characters: [String]?
+    let url: String?
+    let created: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name
+        case airDate = "air_date"
+        case episode, characters, url, created
+    }
+}
+
+
 enum Gender: String, Codable {
     case female = "Female"
     case male = "Male"
@@ -50,6 +70,8 @@ enum Species: String, Codable {
     case alien = "Alien"
     case human = "Human"
 }
+
+
 
 enum Status: String, Codable {
     case alive = "Alive"
