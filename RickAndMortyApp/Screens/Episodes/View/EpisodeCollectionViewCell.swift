@@ -17,19 +17,9 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    let episodeImageView: UIImageView = {
-        let characterImageView = UIImageView()
-        characterImageView.image = UIImage(named: "LaunchPhoto.png")
-        characterImageView.translatesAutoresizingMaskIntoConstraints = false
-        characterImageView.contentMode = .scaleAspectFill
-        characterImageView.layer.cornerRadius = 10.0
-        characterImageView.layer.masksToBounds = true
-        return characterImageView
-    }()
-    
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = "Earth"
+        nameLabel.text = ""
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         nameLabel.textColor = .black
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +28,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var typeLabel: UILabel = {
         let typeLabel = UILabel()
-        typeLabel.text = "Type:"
+        typeLabel.text = ""
         typeLabel.textColor = .black
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         return typeLabel
@@ -54,7 +44,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var dimensionLabel: UILabel = {
         let dimensionLabel = UILabel()
-        dimensionLabel.text = "Episode: "
+        dimensionLabel.text = ""
         dimensionLabel.textColor = .black
         dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
         return dimensionLabel
@@ -62,7 +52,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var dimensionNameLabel: UILabel = {
         let dimensionLabel = UILabel()
-        dimensionLabel.text = " "
+        dimensionLabel.text = ""
         dimensionLabel.textColor = .black
         dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
         return dimensionLabel
@@ -84,7 +74,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         typeStackView.backgroundColor = .clear
         typeStackView.distribution = .fillProportionally
         typeStackView.axis = .horizontal
-        typeStackView.alignment = .leading
         typeStackView.spacing = 0
         typeStackView.translatesAutoresizingMaskIntoConstraints = false
         return typeStackView
@@ -95,7 +84,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         dimensionStackView.backgroundColor = .clear
         dimensionStackView.distribution = .equalSpacing
         dimensionStackView.axis = .horizontal
-        dimensionStackView.alignment = .leading
         dimensionStackView.spacing = 0
         dimensionStackView.translatesAutoresizingMaskIntoConstraints = false
         return dimensionStackView
@@ -105,7 +93,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.addSubview(contentContainerView)
-        contentContainerView.addSubview(episodeImageView)
         contentContainerView.addSubview(stackView)
         
         contentContainerView.layer.borderWidth = 2.0
@@ -116,7 +103,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         stackView.addArrangedSubview(nameLabel)
         stackView.addArrangedSubview(typeStackView)
         stackView.addArrangedSubview(dimensionStackView)
-        
         
         typeStackView.addArrangedSubview(typeLabel)
         typeStackView.addArrangedSubview(typeNameLabel)
@@ -130,13 +116,8 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
             contentContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             contentContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
-            episodeImageView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 10),
-            episodeImageView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
-            episodeImageView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
-            episodeImageView.widthAnchor.constraint(equalTo: contentContainerView.heightAnchor),
-            
             stackView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: episodeImageView.trailingAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor, constant: -10),
             stackView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
         ])

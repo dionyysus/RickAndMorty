@@ -18,6 +18,11 @@ struct EpisodeResponse: Codable {
     let results: [Episodes]?
 }
 
+struct LocationResponse: Codable {
+    let info: Info?
+    let results: [Locations]?
+}
+
 // MARK: - Info
 struct Info: Codable {
     let count, pages: Int?
@@ -39,6 +44,7 @@ struct Characters: Codable {
     let created: String?
 }
 
+// MARK: - Result
 struct Episodes: Codable {
     let id: Int?
     let name, airDate, episode: String?
@@ -53,6 +59,14 @@ struct Episodes: Codable {
     }
 }
 
+// MARK: - Result
+struct Locations: Codable {
+    let id: Int?
+    let name, type, dimension: String?
+    let residents: [String]?
+    let url: String?
+    let created: String?
+}
 
 enum Gender: String, Codable {
     case female = "Female"

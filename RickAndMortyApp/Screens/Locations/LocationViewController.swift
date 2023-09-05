@@ -8,7 +8,9 @@
 import UIKit
 
 class LocationViewController: UIViewController {
-
+    
+    private var viewModel: LocationViewModel?
+    
     let searchBar = UISearchBar()
     var isSearch : Bool = false
     
@@ -23,12 +25,17 @@ class LocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel = LocationViewModel(apiManager: APIManager.shared)
+        
         view.addSubview(locationsCollectionView)
         setupConstraints()
         locationsCollectionView.register(LocationsCollectionViewCell.self, forCellWithReuseIdentifier: LocationsCollectionViewCell.identifier)
         locationsCollectionView.delegate = self
         locationsCollectionView.dataSource = self
     
+        viewModel?.fetchLocations { [weak self] in
+            self?.locationsCollectionView.reloadData()
+        }
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Locations"
     }
@@ -71,13 +78,19 @@ class LocationViewController: UIViewController {
 //MARK: Collection View Data Source
 extension LocationViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel?.locations.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationsCollectionViewCell.identifier, for: indexPath) as? LocationsCollectionViewCell else {
             return UICollectionViewCell()
         }
+        
+        let locationFeatures = viewModel?.locations[indexPath.row]
+        cell.nameLabel.text = locationFeatures?.name
+        cell.typeNameLabel.text = locationFeatures?.type
+        cell.dimensionNameLabel.text = locationFeatures?.dimension
+        
         return cell
     }
 }
