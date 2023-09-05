@@ -113,11 +113,8 @@
 		0A2E69242A9D41A7004E065B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				0A486BF92AA7C8B1002AD93F /* EpisodeDetail */,
-				0A486BF82AA7C8A8002AD93F /* LocationDetail */,
 				0AD690742AA63DBF009CCD75 /* Episodes */,
 				0AD6906A2AA5E4A3009CCD75 /* Locations */,
-				0A2E69282A9D45B6004E065B /* Detail */,
 				0A2E69272A9D44D3004E065B /* Characters */,
 				0A2E69262A9D44CC004E065B /* Home */,
 			);
@@ -146,6 +143,7 @@
 		0A2E69272A9D44D3004E065B /* Characters */ = {
 			isa = PBXGroup;
 			children = (
+				0A2E69282A9D45B6004E065B /* Detail */,
 				0A2E692B2A9D45EF004E065B /* View */,
 				0A2E692C2A9D45FA004E065B /* ViewModel */,
 				0ABCE9392A9D63AF007072EB /* CharactersViewController.swift */,
@@ -263,6 +261,7 @@
 		0AD6906A2AA5E4A3009CCD75 /* Locations */ = {
 			isa = PBXGroup;
 			children = (
+				0A486BF82AA7C8A8002AD93F /* LocationDetail */,
 				0AD6906B2AA5E4AA009CCD75 /* View */,
 				0AD6906C2AA5E4AF009CCD75 /* ViewModel */,
 				0AD6906D2AA5E4C9009CCD75 /* LocationViewController.swift */,
@@ -289,6 +288,7 @@
 		0AD690742AA63DBF009CCD75 /* Episodes */ = {
 			isa = PBXGroup;
 			children = (
+				0A486BF92AA7C8B1002AD93F /* EpisodeDetail */,
 				0AD690752AA63DC6009CCD75 /* View */,
 				0AD690762AA63DCB009CCD75 /* ViewModel */,
 				0AD690772AA63DDE009CCD75 /* EpisodeViewController.swift */,
