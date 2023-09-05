@@ -9,7 +9,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var characterId: Int? = 0 
+    var characterId: Int? = 0
     private var viewModel: DetailViewModel?
     
     private lazy var detailImageView: UIImageView = {
@@ -91,7 +91,7 @@ class DetailViewController: UIViewController {
         stackView.distribution = .equalSpacing
         stackView.backgroundColor = .clear
         stackView.axis = .horizontal
-        stackView.alignment = .center 
+        stackView.alignment = .center
         stackView.spacing = 3
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -102,7 +102,7 @@ class DetailViewController: UIViewController {
         stackViewImageAndLabel.distribution = .equalSpacing
         stackViewImageAndLabel.backgroundColor = .clear
         stackViewImageAndLabel.axis = .horizontal
-        stackViewImageAndLabel.alignment = .center
+        stackViewImageAndLabel.alignment = .center 
         stackViewImageAndLabel.spacing = 3
         stackViewImageAndLabel.translatesAutoresizingMaskIntoConstraints = false
         return stackViewImageAndLabel
@@ -209,6 +209,7 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         view.addSubview(detailImageView)
         view.addSubview(titleLabel)
         view.addSubview(detailView)
