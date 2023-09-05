@@ -73,6 +73,11 @@ class LocationViewController: UIViewController {
             locationsCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
+    
+    @objc func gotoViewControllerButton() {
+        let goToViewController = LocationDetailViewController()
+        self.navigationController?.pushViewController(goToViewController, animated: true)
+    }
 }
 
 //MARK: Collection View Data Source
@@ -92,6 +97,12 @@ extension LocationViewController: UICollectionViewDataSource {
         cell.dimensionNameLabel.text = locationFeatures?.dimension
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let locationDetailViewController = LocationDetailViewController()
+        navigationController?.pushViewController(locationDetailViewController, animated: true)
+
     }
 }
 
