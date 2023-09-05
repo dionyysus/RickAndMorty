@@ -29,11 +29,9 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
         
-       
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Characters"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
-        
     }
     
     @objc func handleShowSearchBar() {
@@ -42,7 +40,6 @@ final class CharactersViewController: UIViewController {
     }
     
     func setupConstraints() {
-        
         searchBar.sizeToFit()
 
         NSLayoutConstraint.activate([
@@ -80,11 +77,9 @@ extension CharactersViewController: UICollectionViewDataSource {
 
 //MARK: Collection View Delegate
 extension CharactersViewController: UICollectionViewDelegate {
-    
 }
 
 extension CharactersViewController: UICollectionViewDelegateFlowLayout{
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5.0, left: 15.0, bottom: 5.0, right: 15.0)
     }
