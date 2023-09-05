@@ -36,28 +36,12 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         return nameLabel
     }()
     
-    var typeLabel: UILabel = {
-        let typeLabel = UILabel()
-        typeLabel.text = "Type: "
-        typeLabel.textColor = .blue
-        typeLabel.translatesAutoresizingMaskIntoConstraints = false
-        return typeLabel
-    }()
-    
     var typeNameLabel: UILabel = {
         let typeLabel = UILabel()
-        typeLabel.text = "Planet"
+        typeLabel.text = ""
         typeLabel.textColor = .black
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         return typeLabel
-    }()
-    
-    var dimensionLabel: UILabel = {
-        let dimensionLabel = UILabel()
-        dimensionLabel.text = "Dimension: "
-        dimensionLabel.textColor = .blue
-        dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
-        return dimensionLabel
     }()
     
     var dimensionNameLabel: UILabel = {
@@ -79,27 +63,6 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    private lazy var typeStackView: UIStackView = {
-        let typeStackView = UIStackView()
-        typeStackView.backgroundColor = .clear
-        typeStackView.distribution = .fillProportionally
-        typeStackView.axis = .horizontal
-        typeStackView.alignment = .leading
-        typeStackView.spacing = 0
-        typeStackView.translatesAutoresizingMaskIntoConstraints = false
-        return typeStackView
-    }()
-    
-    private lazy var dimensionStackView: UIStackView = {
-        let dimensionStackView = UIStackView()
-        dimensionStackView.backgroundColor = .clear
-        dimensionStackView.distribution = .equalSpacing
-        dimensionStackView.axis = .horizontal
-        dimensionStackView.alignment = .leading
-        dimensionStackView.spacing = 0
-        dimensionStackView.translatesAutoresizingMaskIntoConstraints = false
-        return dimensionStackView
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -114,16 +77,9 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         contentContainerView.layer.masksToBounds = true
         
         stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(typeStackView)
-        stackView.addArrangedSubview(dimensionStackView)
-        
-        
-        typeStackView.addArrangedSubview(typeLabel)
-        typeStackView.addArrangedSubview(typeNameLabel)
-        
-        dimensionStackView.addArrangedSubview(dimensionLabel)
-        dimensionStackView.addArrangedSubview(dimensionNameLabel)
-        
+        stackView.addArrangedSubview(typeNameLabel)
+        stackView.addArrangedSubview(dimensionNameLabel)
+
         NSLayoutConstraint.activate([
             contentContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             contentContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
