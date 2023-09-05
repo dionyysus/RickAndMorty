@@ -9,6 +9,9 @@ import UIKit
 
 class EpisodeViewController: UIViewController {
     
+    let searchBar = UISearchBar()
+    var isSearch : Bool = false
+
     private let containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +56,32 @@ class EpisodeViewController: UIViewController {
         navigationItem.title = "Episodes"
     }
     
+    func showSearchBarButton(shouldShow: Bool) {
+        if shouldShow {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(handleShowSearchBar))
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    func search(shouldShow: Bool) {
+        showSearchBarButton(shouldShow: !shouldShow)
+        searchBar.showsCancelButton = shouldShow
+        navigationItem.titleView = shouldShow ? searchBar : nil
+    }
+    
+    @objc func handleShowSearchBar() {
+        search(shouldShow: true)
+        searchBar.becomeFirstResponder()
+        searchBar.placeholder = "Search"
+        
+    }
+    
     func setupConstraints() {
+        searchBar.sizeToFit()
+        searchBar.delegate = self
+        showSearchBarButton(shouldShow: true)
+        
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: view.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -127,4 +155,38 @@ extension EpisodeViewController: UICollectionViewDelegateFlowLayout{
             return 0.0
         }
         return 10.0
-    }}
+    }
+}
+
+extension EpisodeViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isSearch = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        isSearch = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        search(shouldShow: false)
+        isSearch = false
+        seasonCollectionView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+//        if trimmedText.isEmpty {
+//            isSearch = false
+//        } else {
+//            isSearch = true
+//            viewModel?.search(for: searchText)
+//            charactersCollectionView.reloadData()
+//        }
+        
+        seasonCollectionView.reloadData()
+    }
+}
