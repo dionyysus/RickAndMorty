@@ -38,7 +38,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var typeLabel: UILabel = {
         let typeLabel = UILabel()
-        typeLabel.text = "Type: "
+        typeLabel.text = "Type:"
         typeLabel.textColor = .black
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         return typeLabel
@@ -46,7 +46,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var typeNameLabel: UILabel = {
         let typeLabel = UILabel()
-        typeLabel.text = "Planet"
+        typeLabel.text = ""
         typeLabel.textColor = .black
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         return typeLabel
@@ -54,7 +54,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var dimensionLabel: UILabel = {
         let dimensionLabel = UILabel()
-        dimensionLabel.text = "Dimension: "
+        dimensionLabel.text = "Episode: "
         dimensionLabel.textColor = .black
         dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
         return dimensionLabel
@@ -62,7 +62,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var dimensionNameLabel: UILabel = {
         let dimensionLabel = UILabel()
-        dimensionLabel.text = "Cronenberg Dimension"
+        dimensionLabel.text = " "
         dimensionLabel.textColor = .black
         dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
         return dimensionLabel
@@ -100,8 +100,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         dimensionStackView.translatesAutoresizingMaskIntoConstraints = false
         return dimensionStackView
     }()
-    
-   
     
     override init(frame: CGRect) {
         super.init(frame: frame)

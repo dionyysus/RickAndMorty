@@ -9,6 +9,8 @@ import UIKit
 
 class EpisodeViewController: UIViewController {
     
+    private var viewModel: EpisodeViewModel?
+    
     let searchBar = UISearchBar()
     var isSearch : Bool = false
 
@@ -37,6 +39,7 @@ class EpisodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = EpisodeViewModel(apiManager: APIManager.shared)
         
         containerView.addSubview(seasonCollectionView)
         containerView.addSubview(episodeCollectionView)
@@ -51,6 +54,10 @@ class EpisodeViewController: UIViewController {
         episodeCollectionView.register(EpisodeCollectionViewCell.self, forCellWithReuseIdentifier: EpisodeCollectionViewCell.identifier)
         episodeCollectionView.delegate = self
         episodeCollectionView.dataSource = self
+        
+        viewModel?.fetchEpisodes { [weak self] in
+            self?.episodeCollectionView.reloadData()
+        }
         
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Episodes"
@@ -74,7 +81,6 @@ class EpisodeViewController: UIViewController {
         search(shouldShow: true)
         searchBar.becomeFirstResponder()
         searchBar.placeholder = "Search"
-        
     }
     
     func setupConstraints() {
@@ -105,9 +111,9 @@ class EpisodeViewController: UIViewController {
 extension EpisodeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == seasonCollectionView {
-            return 50
+            return 10
         } else {
-            return 50
+            return viewModel?.episodes.count ?? 0
         }
     }
     
@@ -121,6 +127,12 @@ extension EpisodeViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCollectionViewCell.identifier, for: indexPath) as? EpisodeCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            
+            let episodeFeatures = viewModel?.episodes[indexPath.row]
+            cell.nameLabel.text = episodeFeatures?.name
+            cell.typeLabel.text = episodeFeatures?.airDate
+            cell.dimensionLabel.text = episodeFeatures?.episode
+          
             return cell
         }
     }

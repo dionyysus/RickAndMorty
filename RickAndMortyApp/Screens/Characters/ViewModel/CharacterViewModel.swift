@@ -19,7 +19,7 @@ class CharacterViewModel {
     }
     
     func fetchCharacters(completion: @escaping () -> Void) {
-        APIManager.shared.execute(url: APIManager.shared.baseURL) { (data: CharacterResponse?) in
+        APIManager.shared.execute(url: APIManager.shared.charactersURL) { (data: CharacterResponse?) in
             self.characters = data?.results ?? []
             DispatchQueue.main.async {
                 completion()
