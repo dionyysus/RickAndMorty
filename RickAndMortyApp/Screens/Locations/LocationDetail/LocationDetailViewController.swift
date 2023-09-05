@@ -31,7 +31,7 @@ class LocationDetailViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Earth"
-        titleLabel.textColor = .blue
+        titleLabel.textColor = .black
         titleLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         return titleLabel
@@ -200,11 +200,11 @@ class LocationDetailViewController: UIViewController {
             locationDetailImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             locationDetailImageView.heightAnchor.constraint(equalToConstant: 400),
             
-            titleLabel.topAnchor.constraint(equalTo: locationDetailImageView.bottomAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: locationDetailImageView.bottomAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-            detailView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5),
+            detailView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10),
             detailView.heightAnchor.constraint(equalToConstant: 120),
@@ -214,12 +214,12 @@ class LocationDetailViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: detailView.trailingAnchor, constant: -20),
             
             residentsLabel.topAnchor.constraint(equalTo: detailView.bottomAnchor, constant: 10),
-            residentsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            residentsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             residentsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
             charactersCollectionView.topAnchor.constraint(equalTo: residentsLabel.bottomAnchor, constant: 10),
-            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             charactersCollectionView.heightAnchor.constraint(equalToConstant: 100),
         ])
     }

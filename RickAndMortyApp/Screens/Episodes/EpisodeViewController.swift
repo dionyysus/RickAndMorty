@@ -105,6 +105,11 @@ class EpisodeViewController: UIViewController {
             episodeCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
         ])
     }
+    
+    @objc func gotoViewControllerButton() {
+        let goToViewController = EpisodeDetailViewController()
+        self.navigationController?.pushViewController(goToViewController, animated: true)
+    }
 }
 
 //MARK: Collection View Data Source
@@ -135,6 +140,11 @@ extension EpisodeViewController: UICollectionViewDataSource {
           
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let episodeDetailViewController = EpisodeDetailViewController()
+        navigationController?.pushViewController(episodeDetailViewController, animated: true)
     }
 }
 
