@@ -22,6 +22,11 @@ final class ListViewLayout: UICollectionViewLayout {
 
 class HomeViewController: UIViewController {
     
+    private var characterviewModel: CharacterViewModel?
+    private var locationViewModel: LocationViewModel?
+    private var episodeViewModel: EpisodeViewModel?
+
+
     private let episodeContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +66,7 @@ class HomeViewController: UIViewController {
     
     private lazy var backgroundImage: UIImageView = {
         let locationDetailImageView = UIImageView()
-        locationDetailImageView.image = UIImage(named: "mortyy.jpg")
+        locationDetailImageView.image = UIImage(named: "homePage")
         locationDetailImageView.translatesAutoresizingMaskIntoConstraints = false
         locationDetailImageView.contentMode = .scaleAspectFill
         return locationDetailImageView
@@ -164,6 +169,11 @@ class HomeViewController: UIViewController {
         
         view.backgroundColor = .white
         
+        characterviewModel = CharacterViewModel(apiManager: APIManager.shared)
+        locationViewModel = LocationViewModel(apiManager: APIManager.shared)
+        episodeViewModel = EpisodeViewModel(apiManager: APIManager.shared)
+
+        
         // let buttons = [charactersButton, locationsButton, episodesButton]
         //        addButtonsToStackview(buttons: buttons)
         //        setButtonConstraints(buttons: buttons)
@@ -190,6 +200,18 @@ class HomeViewController: UIViewController {
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
+        
+        characterviewModel?.fetchCharacters { [weak self] in
+            self?.charactersCollectionView.reloadData()
+        }
+        
+        locationViewModel?.fetchLocations { [weak self] in
+            self?.locationsCollectionView.reloadData()
+        }
+        
+        episodeViewModel?.fetchEpisodes { [weak self] in
+            self?.episodeCollectionView.reloadData()
+        }
         
         episodeCollectionView.register(EpisodeCollectionViewCell.self, forCellWithReuseIdentifier: EpisodeCollectionViewCell.identifier)
         episodeCollectionView.delegate = self
@@ -321,7 +343,13 @@ class HomeViewController: UIViewController {
 //MARK: Collection View Data Source
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        if collectionView == charactersCollectionView {
+            return characterviewModel?.characters.count ?? 0
+        } else if collectionView == locationsCollectionView {
+            return locationViewModel?.locations.count ?? 0
+        } else {
+            return episodeViewModel?.episodes.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -329,7 +357,16 @@ extension HomeViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as? CharactersCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            guard let characterFeatures = characterviewModel?.characters[indexPath.row] else {
+                return UICollectionViewCell()
+            }
+            
             cell.nameLabel.textColor = .white
+            cell.nameLabel.text = characterFeatures.name
+            if let posterPath = characterFeatures.image,
+               let imgUrl = URL(string: "\(posterPath)") {
+                cell.characterImageView.loadImg(url: imgUrl)
+            }
             return cell
         } else if collectionView == episodeCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCollectionViewCell.identifier, for: indexPath) as? EpisodeCollectionViewCell else {
@@ -338,8 +375,15 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.nameLabel.textColor = .white
             cell.dimensionLabel.textColor = .white
             cell.typeLabel.textColor = .white
-//            cell.backgroundColor = UIColor(red: 91/255, green: 196/255, blue: 189/255, alpha: 0.7)
             cell.layer.cornerRadius = 10
+            
+            guard let episodeFeatures = episodeViewModel?.episodes[indexPath.row] else {
+                return UICollectionViewCell()
+            }
+            
+            cell.nameLabel.text = episodeFeatures.name
+            cell.typeLabel.text = episodeFeatures.airDate
+            cell.dimensionLabel.text = episodeFeatures.episode
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationsCollectionViewCell.identifier, for: indexPath) as? LocationsCollectionViewCell else {
@@ -348,11 +392,26 @@ extension HomeViewController: UICollectionViewDataSource {
             cell.dimensionNameLabel.textColor = .white
             cell.nameLabel.textColor = .white
             cell.typeNameLabel.textColor = .white
-//            cell.backgroundColor = UIColor(red: 91/255, green: 196/255, blue: 189/255, alpha: 0.7)
             cell.layer.cornerRadius = 10
+            let locationFeatures = locationViewModel?.locations[indexPath.row]
+            cell.nameLabel.text = locationFeatures?.name
+            cell.typeNameLabel.text = locationFeatures?.type
+            cell.dimensionNameLabel.text = locationFeatures?.dimension
+            
             return cell
         }
+        
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if collectionView == charactersCollectionView {
+//            let detailViewController = DetailViewController()
+//            if let character = viewModel?.characters[indexPath.row] {
+//                detailViewController.prepare(character: character)
+//                navigationController?.pushViewController(detailViewController, animated: true)
+//            }
+//        }
+//    }
 }
 
 //MARK: Collection View Delegate
@@ -368,9 +427,9 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if collectionView == episodeCollectionView {
-            return CGSize(width: 180, height: 100)
+            return CGSize(width: 200, height: 100)
         } else if collectionView == locationsCollectionView {
-            return CGSize(width: 180, height: 100)
+            return CGSize(width: 200, height: 100)
         }
         else {
             return CGSize(width: view.frame.width/2 - 20, height: 200)
