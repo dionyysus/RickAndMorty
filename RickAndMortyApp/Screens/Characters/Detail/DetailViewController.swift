@@ -9,7 +9,6 @@ import UIKit
 
 class DetailViewController: UIViewController {
     
-    var characterId: Int? = 0
     private var viewModel: DetailViewModel?
     
     private lazy var detailImageView: UIImageView = {
@@ -146,7 +145,7 @@ class DetailViewController: UIViewController {
     
     private lazy var origineLabel: UILabel = {
         let spesiecLabel = UILabel()
-        spesiecLabel.text = "Origine: "
+        spesiecLabel.text = "Origin: "
         spesiecLabel.textColor = .orange
         spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         spesiecLabel.translatesAutoresizingMaskIntoConstraints = false

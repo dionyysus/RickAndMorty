@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class LocationDetailViewModel {
+    
+    var locations: Locations?
+    
+    init(locations: Locations) {
+        self.locations = locations
+    }
+}

@@ -412,9 +412,15 @@ extension HomeViewController: UICollectionViewDataSource {
             }
         } else if collectionView == locationsCollectionView {
             let locationDetailViewController = LocationDetailViewController()
-            navigationController?.pushViewController(locationDetailViewController, animated: true)
+            if let location = locationViewModel?.locations[indexPath.row] {
+                locationDetailViewController.prepare(location: location)
+                navigationController?.pushViewController(locationDetailViewController, animated: true)
+            }
         } else {
             let episodeDetailViewController = EpisodeDetailViewController()
+//            if let episode = episodeViewModel?.episodes[indexPath.row] {
+//                episodeDetailViewController.prepa
+//            }
             navigationController?.pushViewController(episodeDetailViewController, animated: true)
         }
         
