@@ -170,13 +170,13 @@ extension EpisodeViewController: UICollectionViewDelegateFlowLayout{
         if collectionView == seasonCollectionView {
             return 0.0
         }
-        return 10.0
+        return 5.0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == seasonCollectionView {
             return 0.0
         }
-        return 10.0
+        return 5.0
     }
 }
 

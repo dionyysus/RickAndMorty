@@ -7,21 +7,32 @@
 
 import UIKit
 
+final class ListViewLayout: UICollectionViewLayout {
+    
+    override func prepare() {
+        super.prepare()
+        guard let collectionView = collectionView else { return }
+        let customSize = CGSize(width: collectionView.bounds.width, height: 120)
+    }
+
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        true
+    }
+}
+
 class HomeViewController: UIViewController {
     
-    let homeImageView: UIImageView = {
-        let homeImageView = UIImageView()
-        homeImageView.image = UIImage(named: "background.png")
-        homeImageView.translatesAutoresizingMaskIntoConstraints = false
-        homeImageView.contentMode = .scaleAspectFill
-        homeImageView.layer.cornerRadius = 10.0
-        homeImageView.layer.masksToBounds = true
-        return homeImageView
+    private lazy var backgroundImage: UIImageView = {
+        let locationDetailImageView = UIImageView()
+        locationDetailImageView.image = UIImage(named: "home.png")
+        locationDetailImageView.translatesAutoresizingMaskIntoConstraints = false
+        locationDetailImageView.contentMode = .scaleAspectFill
+        return locationDetailImageView
     }()
     
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         charactersCollectionView.backgroundColor = .clear
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,9 +40,18 @@ class HomeViewController: UIViewController {
         return charactersCollectionView
     }()
     
+    private let locationsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let locationsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        locationsCollectionView.backgroundColor = .clear
+        locationsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        return locationsCollectionView
+    }()
+    
     private let episodeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         let episodeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         episodeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         episodeCollectionView.backgroundColor = .clear
@@ -42,8 +62,8 @@ class HomeViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = "Characters"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        titleLabel.textColor = .white
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textColor = .white
         return titleLabel
     }()
     
@@ -51,8 +71,17 @@ class HomeViewController: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = "Episodes"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        titleLabel.textColor = .white
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textColor = .white
+        return titleLabel
+    }()
+    
+    var locationTitleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.text = "Locations"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textColor = .white
         return titleLabel
     }()
     
@@ -95,20 +124,28 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let buttons = [charactersButton, locationsButton, episodesButton]
-        addButtonsToStackview(buttons: buttons)
-        setButtonConstraints(buttons: buttons)
         
-        let backgroundImage = UIImageView(image: UIImage(named: "home.png"))
-        backgroundImage.contentMode = .scaleAspectFill
+        view.backgroundColor = .white
+        
+        let buttons = [charactersButton, locationsButton, episodesButton]
+//        addButtonsToStackview(buttons: buttons)
+//        setButtonConstraints(buttons: buttons)
+        
+//        let backgroundImage = UIImageView(image: UIImage(named: "home.png"))
+//        backgroundImage.contentMode = .scaleAspectFill
         view.addSubview(backgroundImage)
         view.addSubview(stackView)
-        view.addSubview(homeImageView)
-        view.addSubview(titleLabel)
+        view.addSubview(stackView)
         view.addSubview(charactersCollectionView)
+        view.addSubview(titleLabel)
         view.addSubview(episodeTitleLabel)
-        //view.addSubview(episodeCollectionView)
+        view.addSubview(episodeCollectionView)
+        view.addSubview(locationTitleLabel)
+        view.addSubview(locationsCollectionView)
+        
+        locationsCollectionView.register(LocationsCollectionViewCell.self, forCellWithReuseIdentifier: LocationsCollectionViewCell.identifier)
+        locationsCollectionView.delegate = self
+        locationsCollectionView.dataSource = self
         
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
@@ -118,48 +155,76 @@ class HomeViewController: UIViewController {
         episodeCollectionView.delegate = self
         episodeCollectionView.dataSource = self
         
+        //navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Rick And Morty"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            
-            homeImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            homeImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            homeImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            homeImageView.heightAnchor.constraint(equalToConstant: 300),
-            
-            titleLabel.topAnchor.constraint(equalTo: homeImageView.bottomAnchor, constant: 10),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            
-            charactersCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            charactersCollectionView.heightAnchor.constraint(equalToConstant: 200),
-            
-            episodeTitleLabel.topAnchor.constraint(equalTo: charactersCollectionView.bottomAnchor, constant: 10),
-            episodeTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            
-//            episodeCollectionView.topAnchor.constraint(equalTo: episodeTitleLabel.bottomAnchor),
-//            episodeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-//            episodeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-//            episodeCollectionView.heightAnchor.constraint(equalToConstant: 400),
-//
-            
-            stackView.topAnchor.constraint(equalTo: episodeTitleLabel.bottomAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-
-            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-
-        ])
         
         charactersButton.addTarget(self, action: #selector(didTapCharacterButton), for: .touchUpInside)
         locationsButton.addTarget(self, action: #selector(didTapLocationButton), for: .touchUpInside)
         episodesButton.addTarget(self, action: #selector(didTapEpisodeButton), for: .touchUpInside)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        NSLayoutConstraint.activate([
+ 
+            episodeTitleLabel.topAnchor.constraint(equalTo: (navigationController!.navigationBar.bottomAnchor)),
+            episodeTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            episodeTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            episodeTitleLabel.heightAnchor.constraint(equalToConstant: 50),
+
+            episodeCollectionView.topAnchor.constraint(equalTo: episodeTitleLabel.bottomAnchor),
+            episodeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            episodeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            episodeCollectionView.heightAnchor.constraint(equalToConstant: 150),
+
+            locationTitleLabel.topAnchor.constraint(equalTo: episodeCollectionView.bottomAnchor),
+            locationTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+
+            locationsCollectionView.topAnchor.constraint(equalTo: locationTitleLabel.bottomAnchor),
+            locationsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            locationsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            locationsCollectionView.heightAnchor.constraint(equalToConstant: 150),
+
+            titleLabel.topAnchor.constraint(equalTo: locationsCollectionView.bottomAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
+
+            charactersCollectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            //charactersCollectionView.heightAnchor.constraint(equalToConstant: 400),
+
+            //            stackView.topAnchor.constraint(equalTo: locationTitleLabel.bottomAnchor, constant: 10),
+            //            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            //            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            //            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+           
+                      
+            
+        ])
+        
+        episodeTitleLabel.isUserInteractionEnabled = true
+        let gestureEpisodeRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapEpisodeButton))
+        episodeTitleLabel.addGestureRecognizer(gestureEpisodeRecognizer)
+        
+        locationTitleLabel.isUserInteractionEnabled = true
+        let gestureLocationRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapLocationButton))
+        locationTitleLabel.addGestureRecognizer(gestureLocationRecognizer)
+        
+        titleLabel.isUserInteractionEnabled = true
+        let gestureCharacterRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapCharacterButton))
+        titleLabel.addGestureRecognizer(gestureCharacterRecognizer)
+    }
+ 
     
     @objc func didTapCharacterButton() {
         let goToViewController = CharactersViewController()
@@ -176,31 +241,27 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(goToViewController, animated: true)
     }
     
-    func addButtonsToStackview(buttons: [UIButton]) {
-        for button in buttons {
-            stackView.addArrangedSubview(button)
-        }
-    }
-    
-    func setButtonConstraints(buttons: [UIButton]) {
-        
-        for button in buttons {
-            button.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                button.widthAnchor.constraint(equalToConstant: 160),
-                button.heightAnchor.constraint(equalToConstant: 50)
-            ])
-        }
-    }
+//    func addButtonsToStackview(buttons: [UIButton]) {
+//        for button in buttons {
+//            stackView.addArrangedSubview(button)
+//        }
+//    }
+//
+//    func setButtonConstraints(buttons: [UIButton]) {
+//        for button in buttons {
+//            button.translatesAutoresizingMaskIntoConstraints = false
+//            NSLayoutConstraint.activate([
+//                button.widthAnchor.constraint(equalToConstant: 160),
+//                button.heightAnchor.constraint(equalToConstant: 50)
+//            ])
+//        }
+//    }
 }
+
 //MARK: Collection View Data Source
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == charactersCollectionView {
-            return 5
-        } else {
-            return 10
-        }
+       return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -208,18 +269,25 @@ extension HomeViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as? CharactersCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            cell.nameLabel.textColor = .white
             return cell
-        } else {
+        } else if collectionView == episodeCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCollectionViewCell.identifier, for: indexPath) as? EpisodeCollectionViewCell else {
                 return UICollectionViewCell()
             }
             cell.nameLabel.textColor = .white
+            cell.dimensionLabel.textColor = .white
+            cell.typeLabel.textColor = .white
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LocationsCollectionViewCell.identifier, for: indexPath) as? LocationsCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            cell.dimensionNameLabel.textColor = .white
+            cell.nameLabel.textColor = .white
+            cell.typeNameLabel.textColor = .white
             return cell
         }
-        
     }
-   
 }
 
 //MARK: Collection View Delegate
@@ -233,7 +301,15 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width/2 - 20, height: 200)
+        
+        if collectionView == episodeCollectionView {
+            return CGSize(width: 180, height: 100)
+        } else if collectionView == locationsCollectionView {
+            return CGSize(width: 180, height: 100)
+        }
+        else {
+            return CGSize(width: view.frame.width/2 - 20, height: 200)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

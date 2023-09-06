@@ -41,23 +41,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         return typeLabel
     }()
     
-    var typeNameLabel: UILabel = {
-        let typeLabel = UILabel()
-        typeLabel.text = "AA"
-        typeLabel.textColor = .black
-        typeLabel.translatesAutoresizingMaskIntoConstraints = false
-        return typeLabel
-    }()
-    
     var dimensionLabel: UILabel = {
-        let dimensionLabel = UILabel()
-        dimensionLabel.text = "AA"
-        dimensionLabel.textColor = .black
-        dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
-        return dimensionLabel
-    }()
-    
-    var dimensionNameLabel: UILabel = {
         let dimensionLabel = UILabel()
         dimensionLabel.text = "AA"
         dimensionLabel.textColor = .black
@@ -109,17 +93,11 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         contentContainerView.layer.masksToBounds = true
         
         stackView.addArrangedSubview(nameLabel)
-        stackView.addArrangedSubview(typeStackView)
-        stackView.addArrangedSubview(dimensionStackView)
-        
-        typeStackView.addArrangedSubview(typeLabel)
-        typeStackView.addArrangedSubview(typeNameLabel)
-        
-        dimensionStackView.addArrangedSubview(dimensionLabel)
-        dimensionStackView.addArrangedSubview(dimensionNameLabel)
+        stackView.addArrangedSubview(typeLabel)
+        stackView.addArrangedSubview(dimensionLabel)
         
         NSLayoutConstraint.activate([
-            contentContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            contentContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             contentContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             contentContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             contentContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
