@@ -88,7 +88,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         contentContainerView.addSubview(episodeGoButton)
         
         contentContainerView.layer.borderWidth = 2.0
-        contentContainerView.layer.borderColor = UIColor.systemBlue.cgColor
+        contentContainerView.layer.borderColor = UIColor.systemMint.cgColor
         contentContainerView.layer.cornerRadius = 10.0
         contentContainerView.layer.masksToBounds = true
         
@@ -100,7 +100,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
             contentContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             contentContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             contentContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            contentContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            contentContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             
             stackView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
