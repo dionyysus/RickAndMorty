@@ -9,9 +9,11 @@ import UIKit
 
 class LocationDetailViewController: UIViewController {
     
+    private var viewModel: LocationDetailViewModel?
+
     private lazy var locationDetailImageView: UIImageView = {
         let locationDetailImageView = UIImageView()
-        locationDetailImageView.image = UIImage(named: "LaunchPhoto.png")
+        locationDetailImageView.image = UIImage(named: "location")
         locationDetailImageView.translatesAutoresizingMaskIntoConstraints = false
         locationDetailImageView.contentMode = .scaleAspectFill
         locationDetailImageView.layer.cornerRadius = 15.0
@@ -24,6 +26,7 @@ class LocationDetailViewController: UIViewController {
         layout.scrollDirection = .horizontal
         let charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        charactersCollectionView.showsHorizontalScrollIndicator = false
         return charactersCollectionView
     }()
     
@@ -120,15 +123,6 @@ class LocationDetailViewController: UIViewController {
         return typeLabel
     }()
     
-    private lazy var firstEpisodeLabel: UILabel = {
-        let firstEpisodeLabel = UILabel()
-        firstEpisodeLabel.text = "First Episode: "
-        firstEpisodeLabel.textColor = .orange
-        firstEpisodeLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        firstEpisodeLabel.translatesAutoresizingMaskIntoConstraints = false
-        return firstEpisodeLabel
-    }()
-    
     private lazy var dimensionLabel: UILabel = {
         let dimensionLabel = UILabel()
         dimensionLabel.text = "Dimension: "
@@ -140,7 +134,7 @@ class LocationDetailViewController: UIViewController {
     
     private lazy var featureLabel1: UILabel = {
         let featureLabel1 = UILabel()
-        featureLabel1.text = "Alive"
+        featureLabel1.text = ""
         featureLabel1.textColor = .black
         featureLabel1.font = UIFont.systemFont(ofSize: 20.0)
         featureLabel1.translatesAutoresizingMaskIntoConstraints = false
@@ -149,21 +143,13 @@ class LocationDetailViewController: UIViewController {
     
     private lazy var featureLabel2: UILabel = {
         let featureLabel2 = UILabel()
-        featureLabel2.text = "Human"
+        featureLabel2.text = ""
         featureLabel2.textColor = .black
         featureLabel2.font = UIFont.systemFont(ofSize: 20.0)
         featureLabel2.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel2
     }()
-    
-    private lazy var featureLabel3: UILabel = {
-        let featureLabel3 = UILabel()
-        featureLabel3.text = "Male"
-        featureLabel3.textColor = .black
-        featureLabel3.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel3.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel3
-    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,11 +163,8 @@ class LocationDetailViewController: UIViewController {
         titleStackView.addArrangedSubview(typeLabel)
         titleStackView.addArrangedSubview(featureLabel1)
         
-        firstEpisodeStackView.addArrangedSubview(firstEpisodeLabel)
+        firstEpisodeStackView.addArrangedSubview(dimensionLabel)
         firstEpisodeStackView.addArrangedSubview(featureLabel2)
-        
-        dimensionStackView.addArrangedSubview(dimensionLabel)
-        dimensionStackView.addArrangedSubview(featureLabel3)
         
         stackView.addArrangedSubview(titleStackView)
         stackView.addArrangedSubview(firstEpisodeStackView)
@@ -193,7 +176,11 @@ class LocationDetailViewController: UIViewController {
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
-        
+      
+        titleLabel.text = viewModel?.locations?.name
+        featureLabel1.text = viewModel?.locations?.type
+        featureLabel2.text = viewModel?.locations?.dimension
+      
         NSLayoutConstraint.activate([
             locationDetailImageView.topAnchor.constraint(equalTo: view.topAnchor),
             locationDetailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -207,7 +194,7 @@ class LocationDetailViewController: UIViewController {
             detailView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10),
-            detailView.heightAnchor.constraint(equalToConstant: 120),
+            detailView.heightAnchor.constraint(equalToConstant: 100),
             
             stackView.topAnchor.constraint(equalTo: detailView.topAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: detailView.leadingAnchor, constant: 20),
@@ -223,13 +210,18 @@ class LocationDetailViewController: UIViewController {
             charactersCollectionView.heightAnchor.constraint(equalToConstant: 100),
         ])
     }
+    
+    
+    func prepare(location: Locations) {
+        viewModel = LocationDetailViewModel(locations: location)
+    }
 }
 
 
 //MARK: Collection View Data Source
 extension LocationDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        viewModel?.locations?.residents?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -237,6 +229,10 @@ extension LocationDetailViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.nameLabel.isHidden = true
+//        if let posterPath = viewModel?.locations?.residents?.first,
+//           let imgUrl = URL(string: "\(posterPath)") {
+//            cell.characterImageView.loadImg(url: imgUrl)
+//        }
         return cell
     }
 }
@@ -253,10 +249,10 @@ extension LocationDetailViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == charactersCollectionView {
-            return CGSize(width: 90, height: 90)
+            return CGSize(width: 100, height: 100)
             
         } else {
-            return CGSize(width: view.frame.width, height: 120)
+            return CGSize(width: 80, height: 80)
         }
         
     }

@@ -101,7 +101,11 @@ extension LocationViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let locationDetailViewController = LocationDetailViewController()
-        navigationController?.pushViewController(locationDetailViewController, animated: true)
+        if let location = viewModel?.locations[indexPath.row] {
+            locationDetailViewController.prepare(location: location)
+            navigationController?.pushViewController(locationDetailViewController, animated: true)
+        }
+        
 
     }
 }
