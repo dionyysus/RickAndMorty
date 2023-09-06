@@ -403,15 +403,22 @@ extension HomeViewController: UICollectionViewDataSource {
         
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if collectionView == charactersCollectionView {
-//            let detailViewController = DetailViewController()
-//            if let character = viewModel?.characters[indexPath.row] {
-//                detailViewController.prepare(character: character)
-//                navigationController?.pushViewController(detailViewController, animated: true)
-//            }
-//        }
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == charactersCollectionView {
+            let detailViewController = DetailViewController()
+            if let character = characterviewModel?.characters[indexPath.row] {
+                detailViewController.prepare(character: character)
+                navigationController?.pushViewController(detailViewController, animated: true)
+            }
+        } else if collectionView == locationsCollectionView {
+            let locationDetailViewController = LocationDetailViewController()
+            navigationController?.pushViewController(locationDetailViewController, animated: true)
+        } else {
+            let episodeDetailViewController = EpisodeDetailViewController()
+            navigationController?.pushViewController(episodeDetailViewController, animated: true)
+        }
+        
+    }
 }
 
 //MARK: Collection View Delegate
