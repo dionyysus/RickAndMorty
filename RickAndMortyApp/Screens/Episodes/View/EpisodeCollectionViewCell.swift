@@ -26,7 +26,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.text = ""
+        nameLabel.text = "AA"
         nameLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         nameLabel.textColor = .black
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -35,7 +35,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var typeLabel: UILabel = {
         let typeLabel = UILabel()
-        typeLabel.text = ""
+        typeLabel.text = "AA"
         typeLabel.textColor = .black
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         return typeLabel
@@ -43,7 +43,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var typeNameLabel: UILabel = {
         let typeLabel = UILabel()
-        typeLabel.text = ""
+        typeLabel.text = "AA"
         typeLabel.textColor = .black
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
         return typeLabel
@@ -51,7 +51,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var dimensionLabel: UILabel = {
         let dimensionLabel = UILabel()
-        dimensionLabel.text = ""
+        dimensionLabel.text = "AA"
         dimensionLabel.textColor = .black
         dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
         return dimensionLabel
@@ -59,7 +59,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     
     var dimensionNameLabel: UILabel = {
         let dimensionLabel = UILabel()
-        dimensionLabel.text = ""
+        dimensionLabel.text = "AA"
         dimensionLabel.textColor = .black
         dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
         return dimensionLabel
@@ -89,7 +89,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     private lazy var dimensionStackView: UIStackView = {
         let dimensionStackView = UIStackView()
         dimensionStackView.backgroundColor = .clear
-        dimensionStackView.distribution = .equalSpacing
+        dimensionStackView.distribution = .fillProportionally
         dimensionStackView.axis = .horizontal
         dimensionStackView.spacing = 0
         dimensionStackView.translatesAutoresizingMaskIntoConstraints = false
