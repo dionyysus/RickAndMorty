@@ -17,16 +17,6 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    let locationImageView: UIImageView = {
-        let characterImageView = UIImageView()
-        characterImageView.image = UIImage(named: "LaunchPhoto.png")
-        characterImageView.translatesAutoresizingMaskIntoConstraints = false
-        characterImageView.contentMode = .scaleAspectFill
-        characterImageView.layer.cornerRadius = 10.0
-        characterImageView.layer.masksToBounds = true
-        return characterImageView
-    }()
-    
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Earth"
@@ -58,7 +48,7 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         stackView.distribution = .fillProportionally
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.spacing = 0
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -68,7 +58,6 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         
         contentView.addSubview(contentContainerView)
-        contentContainerView.addSubview(locationImageView)
         contentContainerView.addSubview(stackView)
         
         contentContainerView.layer.borderWidth = 2.0
@@ -81,20 +70,15 @@ class LocationsCollectionViewCell: UICollectionViewCell {
         stackView.addArrangedSubview(dimensionNameLabel)
 
         NSLayoutConstraint.activate([
-            contentContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            contentContainerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             contentContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             contentContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            contentContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            
-            locationImageView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 10),
-            locationImageView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
-            locationImageView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
-            locationImageView.widthAnchor.constraint(equalTo: contentContainerView.heightAnchor),
+            contentContainerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
             stackView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: locationImageView.trailingAnchor, constant: 10),
+            stackView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor, constant: -10),
-            stackView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
+   
         ])
     }
     

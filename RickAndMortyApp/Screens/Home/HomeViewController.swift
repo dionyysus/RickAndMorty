@@ -108,7 +108,7 @@ class HomeViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(charactersCollectionView)
         view.addSubview(episodeTitleLabel)
-        view.addSubview(episodeCollectionView)
+        //view.addSubview(episodeCollectionView)
         
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
@@ -138,13 +138,13 @@ class HomeViewController: UIViewController {
             episodeTitleLabel.topAnchor.constraint(equalTo: charactersCollectionView.bottomAnchor, constant: 10),
             episodeTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             
-            episodeCollectionView.topAnchor.constraint(equalTo: episodeTitleLabel.bottomAnchor),
-            episodeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            episodeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            episodeCollectionView.heightAnchor.constraint(equalToConstant: 400),
+//            episodeCollectionView.topAnchor.constraint(equalTo: episodeTitleLabel.bottomAnchor),
+//            episodeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+//            episodeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+//            episodeCollectionView.heightAnchor.constraint(equalToConstant: 400),
+//
             
-            
-            stackView.topAnchor.constraint(equalTo: episodeCollectionView.bottomAnchor, constant: 10),
+            stackView.topAnchor.constraint(equalTo: episodeTitleLabel.bottomAnchor, constant: 10),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             

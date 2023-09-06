@@ -89,7 +89,7 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     private lazy var dimensionStackView: UIStackView = {
         let dimensionStackView = UIStackView()
         dimensionStackView.backgroundColor = .clear
-        dimensionStackView.distribution = .equalSpacing
+        dimensionStackView.distribution = .fillProportionally
         dimensionStackView.axis = .horizontal
         dimensionStackView.spacing = 0
         dimensionStackView.translatesAutoresizingMaskIntoConstraints = false
