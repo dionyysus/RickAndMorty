@@ -11,8 +11,10 @@ class LocationViewController: UIViewController {
     
     private var viewModel: LocationViewModel?
     
+    
     let searchBar = UISearchBar()
     var isSearch : Bool = false
+
     
     private let locationsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()

@@ -5,12 +5,17 @@
 //  Created by Gizem Coşkun on 5.09.2023.
 //
 
-
 import UIKit
 
 class EpisodeDetailViewController: UIViewController {
     
     private var viewModel: EpisodeDetailViewModel?
+    
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
     
     private lazy var episodeDetailImageView: UIImageView = {
         let locationDetailImageView = UIImageView()
@@ -24,10 +29,11 @@ class EpisodeDetailViewController: UIViewController {
     
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         charactersCollectionView.showsHorizontalScrollIndicator = false
+        charactersCollectionView.isScrollEnabled = false
         return charactersCollectionView
     }()
     
@@ -122,18 +128,7 @@ class EpisodeDetailViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
-//    private lazy var dimensionStackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.distribution = .fillProportionally
-//        stackView.backgroundColor = .clear
-//        stackView.axis = .horizontal
-//        stackView.alignment = .center
-//        stackView.spacing = 5
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        return stackView
-//    }()
-    
+
     private lazy var typeLabel: UILabel = {
         let typeLabel = UILabel()
         typeLabel.text = "Air Date: "
@@ -173,18 +168,19 @@ class EpisodeDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(episodeDetailImageView)
-        view.addSubview(detailView)
-        view.addSubview(stackView)
-        view.addSubview(charactersCollectionView)
-        view.addSubview(residentsLabel)
+        view.addSubview(scrollView) // ScrollView'i ana view'e ekleyin
+        scrollView.addSubview(episodeDetailImageView)
+        scrollView.addSubview(detailView)
+        scrollView.addSubview(stackView)
+        scrollView.addSubview(charactersCollectionView)
+        scrollView.addSubview(residentsLabel)
         
         titleLabekStackView.addArrangedSubview(titleLabel)
         titleLabekStackView.addArrangedSubview(titleNameabel)
         
         typeStackView.addArrangedSubview(typeLabel)
         typeStackView.addArrangedSubview(featureLabel1)
-
+        
         dimensionStackView.addArrangedSubview(dimensionLabel)
         dimensionStackView.addArrangedSubview(featureLabel2)
         
@@ -201,7 +197,7 @@ class EpisodeDetailViewController: UIViewController {
         featureLabel2.text = viewModel?.episodes?.episode
         
         NSLayoutConstraint.activate([
-            episodeDetailImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            episodeDetailImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             episodeDetailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             episodeDetailImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             episodeDetailImageView.heightAnchor.constraint(equalToConstant: 400),
@@ -222,8 +218,17 @@ class EpisodeDetailViewController: UIViewController {
             charactersCollectionView.topAnchor.constraint(equalTo: residentsLabel.bottomAnchor, constant: 10),
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            charactersCollectionView.heightAnchor.constraint(equalToConstant: 100),
+            charactersCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            charactersCollectionView.heightAnchor.constraint(equalToConstant: view.frame.height),
+
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+        
+            scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
+
     }
     
     func prepare(episode: Episodes) {
@@ -253,14 +258,13 @@ extension EpisodeDetailViewController: UICollectionViewDelegate {
 
 extension EpisodeDetailViewController: UICollectionViewDelegateFlowLayout{
     
-   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt  section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt  section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 5.0, left: 15.0, bottom: 5.0, right: 15.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == charactersCollectionView {
-            return CGSize(width: 100, height: 100)
-            
+            return CGSize(width: 150, height: 150)
         } else {
             return CGSize(width: 120, height: 120)
         }
