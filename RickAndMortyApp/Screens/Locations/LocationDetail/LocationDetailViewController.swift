@@ -30,7 +30,6 @@ class LocationDetailViewController: UIViewController {
         return charactersCollectionView
     }()
     
-    
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Earth"
@@ -150,6 +149,23 @@ class LocationDetailViewController: UIViewController {
         return featureLabel2
     }()
 
+    func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let data = data, let image = UIImage(data: data) {
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        }.resume()
+    }
+    
+    func configure(with imageURL: URL) {
+        fetchImage(from: imageURL) { [weak self] image in
+            DispatchQueue.main.async {
+                self?.locationDetailImageView.image = image
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,7 +196,7 @@ class LocationDetailViewController: UIViewController {
         titleLabel.text = viewModel?.locations?.name
         featureLabel1.text = viewModel?.locations?.type
         featureLabel2.text = viewModel?.locations?.dimension
-      
+
         NSLayoutConstraint.activate([
             locationDetailImageView.topAnchor.constraint(equalTo: view.topAnchor),
             locationDetailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -211,7 +227,6 @@ class LocationDetailViewController: UIViewController {
         ])
     }
     
-    
     func prepare(location: Locations) {
         viewModel = LocationDetailViewModel(locations: location)
     }
@@ -229,10 +244,11 @@ extension LocationDetailViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.nameLabel.isHidden = true
-//        if let posterPath = viewModel?.locations?.residents?.first,
-//           let imgUrl = URL(string: "\(posterPath)") {
-//            cell.characterImageView.loadImg(url: imgUrl)
+        
+//        if let imageURL = viewModel?.locations?.residents?[indexPath.row] {
+//            cell.configure(with: URL(string: imageURL)!)
 //        }
+
         return cell
     }
 }

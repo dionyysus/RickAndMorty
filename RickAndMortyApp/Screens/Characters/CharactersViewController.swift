@@ -100,6 +100,7 @@ extension CharactersViewController: UICollectionViewDataSource {
         }
         
         cell.nameLabel.text = characterFeatures.name
+
         if let posterPath = characterFeatures.image,
            let imgUrl = URL(string: "\(posterPath)") {
             cell.characterImageView.loadImg(url: imgUrl)

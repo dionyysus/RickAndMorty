@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class EpisodeDetailViewModel {
+    
+    var episodes: Episodes?
+    
+    init(episodes: Episodes) {
+        self.episodes = episodes
+    }
+}

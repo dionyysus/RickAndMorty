@@ -90,6 +90,7 @@ class EpisodeViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: view.topAnchor),
+            containerView.topAnchor.constraint(equalTo: view.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -144,7 +145,11 @@ extension EpisodeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let episodeDetailViewController = EpisodeDetailViewController()
-        navigationController?.pushViewController(episodeDetailViewController, animated: true)
+        if let episode = viewModel?.episodes[indexPath.row] {
+            episodeDetailViewController.prepare(episode: episode)
+            navigationController?.pushViewController(episodeDetailViewController, animated: true)
+        }
+    
     }
 }
 
