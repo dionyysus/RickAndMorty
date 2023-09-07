@@ -25,8 +25,7 @@ class HomeViewController: UIViewController {
     private var characterviewModel: CharacterViewModel?
     private var locationViewModel: LocationViewModel?
     private var episodeViewModel: EpisodeViewModel?
-
-
+    
     private let episodeContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -88,6 +87,7 @@ class HomeViewController: UIViewController {
         let locationsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         locationsCollectionView.translatesAutoresizingMaskIntoConstraints = false
         locationsCollectionView.backgroundColor = .clear
+        locationsCollectionView.showsHorizontalScrollIndicator = false
         return locationsCollectionView
     }()
     
@@ -97,6 +97,7 @@ class HomeViewController: UIViewController {
         let episodeCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         episodeCollectionView.translatesAutoresizingMaskIntoConstraints = false
         episodeCollectionView.backgroundColor = .clear
+        episodeCollectionView.showsHorizontalScrollIndicator = false 
         return episodeCollectionView
     }()
     
@@ -418,10 +419,10 @@ extension HomeViewController: UICollectionViewDataSource {
             }
         } else {
             let episodeDetailViewController = EpisodeDetailViewController()
-//            if let episode = episodeViewModel?.episodes[indexPath.row] {
-//                episodeDetailViewController.prepa
-//            }
-            navigationController?.pushViewController(episodeDetailViewController, animated: true)
+            if let episode = episodeViewModel?.episodes[indexPath.row] {
+                episodeDetailViewController.prepare(episode: episode)
+                navigationController?.pushViewController(episodeDetailViewController, animated: true)
+            }
         }
         
     }

@@ -13,7 +13,6 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     
     let characterImageView: UIImageView = {
         let characterImageView = UIImageView()
-        characterImageView.image = UIImage(named: "LaunchPhoto.png")
         characterImageView.translatesAutoresizingMaskIntoConstraints = false
         characterImageView.contentMode = .scaleAspectFill
         characterImageView.layer.borderWidth = 2.0
@@ -53,6 +52,24 @@ class CharactersCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("erroor")
     }
+    
+//    func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+//        URLSession.shared.dataTask(with: url) { (data, _, error) in
+//            if let data = data, let image = UIImage(data: data) {
+//                completion(image)
+//            } else {
+//                completion(nil)
+//            }
+//        }.resume()
+//    }
+//    
+//    func configure(with imageURL: URL) {
+//        fetchImage(from: imageURL) { [weak self] image in
+//            DispatchQueue.main.async {
+//                self?.characterImageView.image = image
+//            }
+//        }
+//    }
 }
 
 extension UIImageView {

@@ -11,6 +11,12 @@ class LocationDetailViewController: UIViewController {
     
     private var viewModel: LocationDetailViewModel?
 
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
+    }()
+    
     private lazy var locationDetailImageView: UIImageView = {
         let locationDetailImageView = UIImageView()
         locationDetailImageView.image = UIImage(named: "location")
@@ -23,13 +29,12 @@ class LocationDetailViewController: UIViewController {
     
     private let charactersCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         let charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         charactersCollectionView.showsHorizontalScrollIndicator = false
         return charactersCollectionView
     }()
-    
     
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
@@ -150,15 +155,33 @@ class LocationDetailViewController: UIViewController {
         return featureLabel2
     }()
 
+    func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let data = data, let image = UIImage(data: data) {
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        }.resume()
+    }
+    
+    func configure(with imageURL: URL) {
+        fetchImage(from: imageURL) { [weak self] image in
+            DispatchQueue.main.async {
+                self?.locationDetailImageView.image = image
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(locationDetailImageView)
-        view.addSubview(titleAndDetailViewtackView)
-        view.addSubview(stackView)
-        view.addSubview(charactersCollectionView)
-        view.addSubview(residentsLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(locationDetailImageView)
+        scrollView.addSubview(titleAndDetailViewtackView)
+        scrollView.addSubview(stackView)
+        scrollView.addSubview(charactersCollectionView)
+        scrollView.addSubview(residentsLabel)
         
         titleStackView.addArrangedSubview(typeLabel)
         titleStackView.addArrangedSubview(featureLabel1)
@@ -180,9 +203,9 @@ class LocationDetailViewController: UIViewController {
         titleLabel.text = viewModel?.locations?.name
         featureLabel1.text = viewModel?.locations?.type
         featureLabel2.text = viewModel?.locations?.dimension
-      
+
         NSLayoutConstraint.activate([
-            locationDetailImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            locationDetailImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             locationDetailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             locationDetailImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             locationDetailImageView.heightAnchor.constraint(equalToConstant: 400),
@@ -205,12 +228,20 @@ class LocationDetailViewController: UIViewController {
             residentsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
             charactersCollectionView.topAnchor.constraint(equalTo: residentsLabel.bottomAnchor, constant: 10),
-            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            charactersCollectionView.heightAnchor.constraint(equalToConstant: 100),
+            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            charactersCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
+            charactersCollectionView.heightAnchor.constraint(equalToConstant: view.frame.height),
+            
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+        
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
+
     }
-    
     
     func prepare(location: Locations) {
         viewModel = LocationDetailViewModel(locations: location)
@@ -229,10 +260,11 @@ extension LocationDetailViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         cell.nameLabel.isHidden = true
-//        if let posterPath = viewModel?.locations?.residents?.first,
-//           let imgUrl = URL(string: "\(posterPath)") {
-//            cell.characterImageView.loadImg(url: imgUrl)
+        
+//        if let imageURL = viewModel?.locations?.residents?[indexPath.row] {
+//            cell.configure(with: URL(string: imageURL)!)
 //        }
+
         return cell
     }
 }
@@ -249,7 +281,7 @@ extension LocationDetailViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == charactersCollectionView {
-            return CGSize(width: 100, height: 100)
+            return CGSize(width: 150, height: 150)
             
         } else {
             return CGSize(width: 80, height: 80)
