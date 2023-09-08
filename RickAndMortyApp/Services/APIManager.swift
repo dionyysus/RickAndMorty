@@ -31,10 +31,6 @@ class APIManager {
         baseURL + "location"
     }
     
-    var charactersIDURL: String {
-        baseURL + "character/" + (characterID)
-    }
-    
     private init() { }
    
     func execute<T: Decodable>(url: String, completion: @escaping(T?) -> ()) {

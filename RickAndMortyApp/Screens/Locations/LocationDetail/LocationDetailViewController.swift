@@ -166,12 +166,11 @@ class LocationDetailViewController: UIViewController {
         }.resume()
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         characterviewModel = CharacterViewModel(apiManager: APIManager.shared)
-    
+        
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(locationDetailImageView)
@@ -289,12 +288,10 @@ extension LocationDetailViewController: UICollectionViewDataSource {
         }
         
         cell.nameLabel.text = characterviewModel?.characters[indexPath.row].name
-  
         if let posterPath = characterviewModel?.characters[indexPath.row].image,
            let imgUrl = URL(string: "\(posterPath)") {
             cell.characterImageView.loadImg(url: imgUrl)
         }
-        
         return cell
     }
 }
@@ -316,7 +313,6 @@ extension LocationDetailViewController: UICollectionViewDelegateFlowLayout{
         } else {
             return CGSize(width: 80, height: 80)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

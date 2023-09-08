@@ -27,15 +27,6 @@ class CharacterViewModel {
             }
         }
     }
-    
-//    func fetchCharacterIds(completion: @escaping () -> Void) {
-//        APIManager.shared.execute(url: APIManager.shared.charactersIDURL) { (data: CharacterResponse?) in
-//            self.characters = data?.results ?? []
-//            DispatchQueue.main.async {
-//                completion()
-//            }
-//        }
-//    }
 
     func search(for query: String) {
         filteredCharacters = characters.filter { character in
