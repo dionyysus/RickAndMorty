@@ -10,7 +10,8 @@ import UIKit
 final class CharactersViewController: UIViewController {
     
     private var viewModel: CharacterViewModel?
-    
+    private var characterviewModel: CharacterViewModel?
+
     let searchBar = UISearchBar()
     var isSearch : Bool = false
     

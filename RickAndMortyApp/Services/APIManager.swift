@@ -17,7 +17,8 @@ class APIManager {
     static let shared = APIManager()
     
     var baseURL = "https://rickandmortyapi.com/api/"
-        
+    var characterID = ""
+    
     var charactersURL: String {
         baseURL + "character"
     }

@@ -9,9 +9,9 @@ import Foundation
 
 class LocationDetailViewModel {
     
-    var locations: Locations?
-    
-    init(locations: Locations) {
-        self.locations = locations
+    var location: Locations?
+   
+    init(location: Locations?) {
+        self.location = location
     }
 }

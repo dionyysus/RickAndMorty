@@ -10,7 +10,8 @@ import UIKit
 class LocationDetailViewController: UIViewController {
     
     private var viewModel: LocationDetailViewModel?
-
+    private var characterviewModel: CharacterViewModel?
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -154,7 +155,7 @@ class LocationDetailViewController: UIViewController {
         featureLabel2.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel2
     }()
-
+    
     func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
         URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let data = data, let image = UIImage(data: data) {
@@ -165,16 +166,11 @@ class LocationDetailViewController: UIViewController {
         }.resume()
     }
     
-    func configure(with imageURL: URL) {
-        fetchImage(from: imageURL) { [weak self] image in
-            DispatchQueue.main.async {
-                self?.locationDetailImageView.image = image
-            }
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        characterviewModel = CharacterViewModel(apiManager: APIManager.shared)
+        
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(locationDetailImageView)
@@ -199,11 +195,13 @@ class LocationDetailViewController: UIViewController {
         charactersCollectionView.register(CharactersCollectionViewCell.self, forCellWithReuseIdentifier: CharactersCollectionViewCell.identifier)
         charactersCollectionView.delegate = self
         charactersCollectionView.dataSource = self
-      
-        titleLabel.text = viewModel?.locations?.name
-        featureLabel1.text = viewModel?.locations?.type
-        featureLabel2.text = viewModel?.locations?.dimension
-
+        
+        fetchCharacters()
+        
+        titleLabel.text = viewModel?.location?.name
+        featureLabel1.text = viewModel?.location?.type
+        featureLabel2.text = viewModel?.location?.dimension
+        
         NSLayoutConstraint.activate([
             locationDetailImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             locationDetailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -240,31 +238,60 @@ class LocationDetailViewController: UIViewController {
         ])
         
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
-
     }
     
     func prepare(location: Locations) {
-        viewModel = LocationDetailViewModel(locations: location)
+        viewModel = LocationDetailViewModel(location: location)
     }
+    
+    func fetchCharacters() {
+        guard let residents = viewModel?.location?.residents else { return }
+        
+        for residentURL in residents {
+            guard let characterID = residentURL.split(separator: "/").last else {
+                continue
+            }
+            let characterIDString = String(characterID)
+            let characterAPIURL = "https://rickandmortyapi.com/api/character/\(characterIDString)"
+            
+            APIManager.shared.execute(url: characterAPIURL) { (character: Characters?) in
+                if let character = character {
+                    print(character)
+                    
+                    if let characterImageURLString = character.image, let characterImageURL = URL(string: characterImageURLString) {
+                        self.fetchImage(from: characterImageURL) { image in
+                            if let image = image {
+                                DispatchQueue.main.async {
+                                    self.characterviewModel?.characters.append(character)
+                                    self.charactersCollectionView.reloadData()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 }
-
 
 //MARK: Collection View Data Source
 extension LocationDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.locations?.residents?.count ?? 0
+        return characterviewModel?.characters.count ?? 0
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.nameLabel.isHidden = true
         
-//        if let imageURL = viewModel?.locations?.residents?[indexPath.row] {
-//            cell.configure(with: URL(string: imageURL)!)
-//        }
-
+        cell.nameLabel.text = characterviewModel?.characters[indexPath.row].name
+        if let posterPath = characterviewModel?.characters[indexPath.row].image,
+           let imgUrl = URL(string: "\(posterPath)") {
+            cell.characterImageView.loadImg(url: imgUrl)
+        }
         return cell
     }
 }
@@ -286,7 +313,6 @@ extension LocationDetailViewController: UICollectionViewDelegateFlowLayout{
         } else {
             return CGSize(width: 80, height: 80)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
