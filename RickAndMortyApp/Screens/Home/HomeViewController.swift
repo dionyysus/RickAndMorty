@@ -218,7 +218,6 @@ class HomeViewController: UIViewController {
         episodeCollectionView.delegate = self
         episodeCollectionView.dataSource = self
         
-       // navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Rick And Morty"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
@@ -332,7 +331,7 @@ class HomeViewController: UIViewController {
     //
     //    func setButtonConstraints(buttons: [UIButton]) {
     //        for button in buttons {
-    //            button.translatesAutoresizingMaskIntoConstraints = false
+    //            button.translatesaAutoresizingMaskIntoConstraints = false
     //            NSLayoutConstraint.activate([
     //                button.widthAnchor.constraint(equalToConstant: 160),
     //                button.heightAnchor.constraint(equalToConstant: 50)
