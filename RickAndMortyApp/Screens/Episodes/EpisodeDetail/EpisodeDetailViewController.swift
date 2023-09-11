@@ -10,6 +10,7 @@ import UIKit
 class EpisodeDetailViewController: UIViewController {
     
     private var viewModel: EpisodeDetailViewModel?
+    private var characterviewModel: CharacterViewModel?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -167,8 +168,11 @@ class EpisodeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        characterviewModel = CharacterViewModel(apiManager: APIManager.shared)
+
         view.backgroundColor = .white
-        view.addSubview(scrollView) // ScrollView'i ana view'e ekleyin
+        view.addSubview(scrollView)
         scrollView.addSubview(episodeDetailImageView)
         scrollView.addSubview(detailView)
         scrollView.addSubview(stackView)
@@ -195,6 +199,8 @@ class EpisodeDetailViewController: UIViewController {
         titleNameabel.text = viewModel?.episodes?.name
         featureLabel1.text = viewModel?.episodes?.airDate
         featureLabel2.text = viewModel?.episodes?.episode
+        
+        fetchCharacters()
         
         NSLayoutConstraint.activate([
             episodeDetailImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -234,20 +240,64 @@ class EpisodeDetailViewController: UIViewController {
     func prepare(episode: Episodes) {
         viewModel = EpisodeDetailViewModel(episodes: episode)
     }
+    
+    func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            if let data = data, let image = UIImage(data: data) {
+                completion(image)
+            } else {
+                completion(nil)
+            }
+        }.resume()
+    }
+    
+    func fetchCharacters() {
+        guard let characters = viewModel?.episodes?.characters else { return }
+        
+        for characterURL in characters {
+            guard let characterID = characterURL.split(separator: "/").last else {
+                continue
+            }
+            let characterIDString = String(characterID)
+            let characterAPIURL = "https://rickandmortyapi.com/api/character/\(characterIDString)"
+            
+            APIManager.shared.execute(url: characterAPIURL) { (character: Characters?) in
+                if let character = character {
+                    print(character)
+                    
+                    if let characterImageURLString = character.image, let characterImageURL = URL(string: characterImageURLString) {
+                        self.fetchImage(from: characterImageURL) { image in
+                            if let image = image {
+                                DispatchQueue.main.async {
+                                    self.characterviewModel?.characters.append(character)
+                                    self.charactersCollectionView.reloadData()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 
 //MARK: Collection View Data Source
 extension EpisodeDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.episodes?.characters?.count ?? 0
+        return characterviewModel?.characters.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharactersCollectionViewCell.identifier, for: indexPath) as? CharactersCollectionViewCell else {
             return UICollectionViewCell()
         }
-        cell.nameLabel.isHidden = true
+        
+        cell.nameLabel.text = characterviewModel?.characters[indexPath.row].name
+        if let posterPath = characterviewModel?.characters[indexPath.row].image,
+           let imgUrl = URL(string: "\(posterPath)") {
+            cell.characterImageView.loadImg(url: imgUrl)
+        }
         return cell
     }
 }
