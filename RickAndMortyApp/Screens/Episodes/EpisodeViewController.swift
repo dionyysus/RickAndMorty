@@ -84,7 +84,11 @@ class EpisodeViewController: UIViewController {
 //MARK: Collection View Data Source
 extension EpisodeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel?.episodes.count ?? 0
+        if isSearch{
+            return viewModel?.filteredEpisodes.count ?? 0
+        } else{
+            return viewModel?.episodes.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -92,16 +96,20 @@ extension EpisodeViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let episodeFeatures = viewModel?.episodes[indexPath.row]
-        cell.nameLabel.text = episodeFeatures?.name
-        cell.typeLabel.text = episodeFeatures?.airDate
-        cell.dimensionLabel.text = episodeFeatures?.episode
+        guard let episodeFeatures = isSearch ? viewModel?.filteredEpisodes[indexPath.row] : viewModel?.episodes[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.nameLabel.text = episodeFeatures.name
+        cell.typeLabel.text = episodeFeatures.airDate
+        cell.dimensionLabel.text = episodeFeatures.episode
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let episodeDetailViewController = EpisodeDetailViewController()
-        if let episode = viewModel?.episodes[indexPath.row] {
+        
+        if let episode = isSearch ? viewModel?.filteredEpisodes[indexPath.row] : viewModel?.episodes[indexPath.row] {
             episodeDetailViewController.prepare(episode: episode)
             navigationController?.pushViewController(episodeDetailViewController, animated: true)
         }
@@ -155,14 +163,13 @@ extension EpisodeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         
-//        if trimmedText.isEmpty {
-//            isSearch = false
-//        } else {
-//            isSearch = true
-//            viewModel?.search(for: searchText)
-//            charactersCollectionView.reloadData()
-//        }
-        
+        if trimmedText.isEmpty {
+            isSearch = false
+        } else {
+            isSearch = true
+            viewModel?.search(for: searchText)
+            episodeCollectionView.reloadData()
+        }
         episodeCollectionView.reloadData()
     }
 }

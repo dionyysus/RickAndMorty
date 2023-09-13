@@ -10,6 +10,7 @@ import Foundation
 class EpisodeViewModel {
     
     var episodes: [Episodes] = []
+    var filteredEpisodes: [Episodes] = []
 
     private var apiManager: APIManager?
 
@@ -23,6 +24,12 @@ class EpisodeViewModel {
             DispatchQueue.main.async {
                 completion()
             }
+        }
+    }
+    
+    func search(for query: String) {
+        filteredEpisodes = episodes.filter { episode in
+            return episode.name?.lowercased().contains(query.lowercased()) ?? false
         }
     }
     
