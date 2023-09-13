@@ -260,7 +260,7 @@ class LocationDetailViewController: UIViewController {
                     
                     if let characterImageURLString = character.image, let characterImageURL = URL(string: characterImageURLString) {
                         self.fetchImage(from: characterImageURL) { image in
-                            if let image = image {
+                            if (image != nil){
                                 DispatchQueue.main.async {
                                     self.characterviewModel?.characters.append(character)
                                     self.charactersCollectionView.reloadData()
