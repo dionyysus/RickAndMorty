@@ -129,7 +129,7 @@ class EpisodeDetailViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-
+    
     private lazy var typeLabel: UILabel = {
         let typeLabel = UILabel()
         typeLabel.text = "Air Date: "
@@ -170,7 +170,7 @@ class EpisodeDetailViewController: UIViewController {
         super.viewDidLoad()
         
         characterviewModel = CharacterViewModel(apiManager: APIManager.shared)
-
+        
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(episodeDetailImageView)
@@ -208,7 +208,7 @@ class EpisodeDetailViewController: UIViewController {
             episodeDetailImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             episodeDetailImageView.heightAnchor.constraint(equalToConstant: 400),
             
-            detailView.topAnchor.constraint(equalTo: episodeDetailImageView.bottomAnchor, constant: 10),
+            detailView.topAnchor.constraint(equalTo: episodeDetailImageView.bottomAnchor),
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10),
             detailView.heightAnchor.constraint(equalToConstant: 120),
@@ -226,15 +226,15 @@ class EpisodeDetailViewController: UIViewController {
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
             charactersCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             charactersCollectionView.heightAnchor.constraint(equalToConstant: view.frame.height),
-
+            
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-            scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
-
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
+        
     }
     
     func prepare(episode: Episodes) {
@@ -267,7 +267,7 @@ class EpisodeDetailViewController: UIViewController {
                     
                     if let characterImageURLString = character.image, let characterImageURL = URL(string: characterImageURLString) {
                         self.fetchImage(from: characterImageURL) { image in
-                            if let image = image {
+                            if (image != nil) {
                                 DispatchQueue.main.async {
                                     self.characterviewModel?.characters.append(character)
                                     self.charactersCollectionView.reloadData()

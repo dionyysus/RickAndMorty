@@ -13,21 +13,6 @@ class EpisodeViewController: UIViewController {
     
     let searchBar = UISearchBar()
     var isSearch : Bool = false
-
-    private let containerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let seasonCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let seasonCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        seasonCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        seasonCollectionView.showsHorizontalScrollIndicator = false
-        return seasonCollectionView
-    }()
     
     private let episodeCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -41,15 +26,9 @@ class EpisodeViewController: UIViewController {
         super.viewDidLoad()
         viewModel = EpisodeViewModel(apiManager: APIManager.shared)
         
-        containerView.addSubview(seasonCollectionView)
-        containerView.addSubview(episodeCollectionView)
-        view.addSubview(containerView)
+        view.addSubview(episodeCollectionView)
         
         setupConstraints()
-        
-        seasonCollectionView.register(SeasonCollectionViewCell.self, forCellWithReuseIdentifier: SeasonCollectionViewCell.identifier)
-        seasonCollectionView.delegate = self
-        seasonCollectionView.dataSource = self
         
         episodeCollectionView.register(EpisodeCollectionViewCell.self, forCellWithReuseIdentifier: EpisodeCollectionViewCell.identifier)
         episodeCollectionView.delegate = self
@@ -89,21 +68,10 @@ class EpisodeViewController: UIViewController {
         showSearchBarButton(shouldShow: true)
         
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: view.topAnchor),
-            containerView.topAnchor.constraint(equalTo: view.topAnchor),
-            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            seasonCollectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            seasonCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            seasonCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            seasonCollectionView.heightAnchor.constraint(equalToConstant: 200),
-            
-            episodeCollectionView.topAnchor.constraint(equalTo: seasonCollectionView.bottomAnchor),
-            episodeCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            episodeCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            episodeCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            episodeCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            episodeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            episodeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            episodeCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
@@ -116,31 +84,19 @@ class EpisodeViewController: UIViewController {
 //MARK: Collection View Data Source
 extension EpisodeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == seasonCollectionView {
-            return 10
-        } else {
-            return viewModel?.episodes.count ?? 0
-        }
+        viewModel?.episodes.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == seasonCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeasonCollectionViewCell.identifier, for: indexPath) as? SeasonCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCollectionViewCell.identifier, for: indexPath) as? EpisodeCollectionViewCell else {
-                return UICollectionViewCell()
-            }
-            
-            let episodeFeatures = viewModel?.episodes[indexPath.row]
-            cell.nameLabel.text = episodeFeatures?.name
-            cell.typeLabel.text = episodeFeatures?.airDate
-            cell.dimensionLabel.text = episodeFeatures?.episode
-          
-            return cell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCollectionViewCell.identifier, for: indexPath) as? EpisodeCollectionViewCell else {
+            return UICollectionViewCell()
         }
+        
+        let episodeFeatures = viewModel?.episodes[indexPath.row]
+        cell.nameLabel.text = episodeFeatures?.name
+        cell.typeLabel.text = episodeFeatures?.airDate
+        cell.dimensionLabel.text = episodeFeatures?.episode
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -149,7 +105,6 @@ extension EpisodeViewController: UICollectionViewDataSource {
             episodeDetailViewController.prepare(episode: episode)
             navigationController?.pushViewController(episodeDetailViewController, animated: true)
         }
-    
     }
 }
 
@@ -172,15 +127,9 @@ extension EpisodeViewController: UICollectionViewDelegateFlowLayout{
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == seasonCollectionView {
-            return 0.0
-        }
         return 5.0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == seasonCollectionView {
-            return 0.0
-        }
         return 5.0
     }
 }
