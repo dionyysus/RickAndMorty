@@ -10,6 +10,7 @@ import Foundation
 class LocationViewModel {
     
     var locations: [Locations] = []
+    var filteredLocations: [Locations] = []
 
     private var apiManager: APIManager?
 
@@ -23,6 +24,12 @@ class LocationViewModel {
             DispatchQueue.main.async {
                 completion()
             }
+        }
+    }
+    
+    func search(for query: String) {
+        filteredLocations = locations.filter { location in
+            return location.name?.lowercased().contains(query.lowercased()) ?? false
         }
     }
     
