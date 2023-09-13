@@ -12,9 +12,15 @@ class EpisodeDetailViewController: UIViewController {
     private var viewModel: EpisodeDetailViewModel?
     private var characterviewModel: CharacterViewModel?
     
+    
     private lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
+        let screensize: CGRect = UIScreen.main.bounds
+        let screenWidth = screensize.width
+        let screenHeight = screensize.height
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: 120, width: screenWidth, height: screenHeight))
         scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.delegate = self
+        scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: 1000)
         return scrollView
     }()
     
@@ -173,6 +179,7 @@ class EpisodeDetailViewController: UIViewController {
         
         view.backgroundColor = .white
         view.addSubview(scrollView)
+        
         scrollView.addSubview(episodeDetailImageView)
         scrollView.addSubview(detailView)
         scrollView.addSubview(stackView)
@@ -203,12 +210,18 @@ class EpisodeDetailViewController: UIViewController {
         fetchCharacters()
         
         NSLayoutConstraint.activate([
+            
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             episodeDetailImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             episodeDetailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             episodeDetailImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             episodeDetailImageView.heightAnchor.constraint(equalToConstant: 400),
             
-            detailView.topAnchor.constraint(equalTo: episodeDetailImageView.bottomAnchor),
+            detailView.topAnchor.constraint(equalTo: episodeDetailImageView.bottomAnchor, constant: 16),
             detailView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             detailView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -10),
             detailView.heightAnchor.constraint(equalToConstant: 120),
@@ -221,16 +234,13 @@ class EpisodeDetailViewController: UIViewController {
             residentsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             residentsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-            charactersCollectionView.topAnchor.constraint(equalTo: residentsLabel.bottomAnchor, constant: 10),
-            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5),
-            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -5),
-            charactersCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            charactersCollectionView.heightAnchor.constraint(equalToConstant: view.frame.height),
             
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            charactersCollectionView.topAnchor.constraint(equalTo: residentsLabel.bottomAnchor, constant: 10),
+            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+           
         ])
         
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
@@ -249,6 +259,13 @@ class EpisodeDetailViewController: UIViewController {
                 completion(nil)
             }
         }.resume()
+    }
+    
+    func calculateCharactersCollectionViewHeight() -> CGFloat {
+        var totalHeight: CGFloat = 0.0
+        let contentSize = charactersCollectionView.collectionViewLayout.collectionViewContentSize
+        totalHeight = contentSize.height
+        return totalHeight
     }
     
     func fetchCharacters() {
@@ -298,6 +315,13 @@ extension EpisodeDetailViewController: UICollectionViewDataSource {
            let imgUrl = URL(string: "\(posterPath)") {
             cell.characterImageView.loadImg(url: imgUrl)
         }
+        
+        if let charactersLayout = charactersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+               let charactersHeight = calculateCharactersCollectionViewHeight()
+               charactersCollectionView.frame.size.height = charactersHeight
+               scrollView.contentSize.height = charactersCollectionView.frame.origin.y + charactersHeight
+           }
+        
         return cell
     }
 }
