@@ -84,7 +84,11 @@ class LocationViewController: UIViewController {
 //MARK: Collection View Data Source
 extension LocationViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.locations.count ?? 0
+        if isSearch{
+            return viewModel?.filteredLocations.count ?? 0
+        } else{
+            return viewModel?.locations.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -92,29 +96,29 @@ extension LocationViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        let locationFeatures = viewModel?.locations[indexPath.row]
-        cell.nameLabel.text = locationFeatures?.name
-        cell.typeNameLabel.text = locationFeatures?.type
-        cell.dimensionNameLabel.text = locationFeatures?.dimension
+        guard let locationFeatures = isSearch ? viewModel?.filteredLocations[indexPath.row] : viewModel?.locations[indexPath.row] else {
+            return UICollectionViewCell()
+        }
+        
+        cell.nameLabel.text = locationFeatures.name
+        cell.typeNameLabel.text = locationFeatures.type
+        cell.dimensionNameLabel.text = locationFeatures.dimension
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let locationDetailViewController = LocationDetailViewController()
-        if let location = viewModel?.locations[indexPath.row] {
+        
+        if let location = isSearch ? viewModel?.filteredLocations[indexPath.row] : viewModel?.locations[indexPath.row] {
             locationDetailViewController.prepare(location: location)
             navigationController?.pushViewController(locationDetailViewController, animated: true)
         }
-        
-
     }
 }
 
 //MARK: Collection View Delegate
-extension LocationViewController: UICollectionViewDelegate {
-    
-}
+extension LocationViewController: UICollectionViewDelegate {}
 
 extension LocationViewController: UICollectionViewDelegateFlowLayout{
     
@@ -156,14 +160,13 @@ extension LocationViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let trimmedText = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         
-//        if trimmedText.isEmpty {
-//            isSearch = false
-//        } else {
-//            isSearch = true
-//            viewModel?.search(for: searchText)
-//            charactersCollectionView.reloadData()
-//        }
-        
+        if trimmedText.isEmpty {
+            isSearch = false
+        } else {
+            isSearch = true
+            viewModel?.search(for: searchText)
+            locationsCollectionView.reloadData()
+        }
         locationsCollectionView.reloadData()
     }
 }
