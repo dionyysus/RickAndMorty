@@ -118,9 +118,7 @@ extension LocationViewController: UICollectionViewDataSource {
 }
 
 //MARK: Collection View Delegate
-extension LocationViewController: UICollectionViewDelegate {
-    
-}
+extension LocationViewController: UICollectionViewDelegate {}
 
 extension LocationViewController: UICollectionViewDelegateFlowLayout{
     
@@ -169,7 +167,6 @@ extension LocationViewController: UISearchBarDelegate {
             viewModel?.search(for: searchText)
             locationsCollectionView.reloadData()
         }
-        
         locationsCollectionView.reloadData()
     }
 }
