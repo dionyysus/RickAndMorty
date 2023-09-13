@@ -95,6 +95,7 @@ class HomeViewController: UIViewController {
         charactersCollectionView.backgroundColor = .clear
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         charactersCollectionView.showsHorizontalScrollIndicator = false
+        charactersCollectionView.isScrollEnabled = false
         return charactersCollectionView
     }()
     
@@ -246,22 +247,6 @@ class HomeViewController: UIViewController {
         totalHeight = contentSize.height
         return totalHeight
     }
-    
-//    func calculateCharactersCollectionViewHeight() -> CGFloat {
-//        var totalHeight: CGFloat = 0.0
-//        if let collectionViewLayout = charactersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            for section in 0..<charactersCollectionView.numberOfSections {
-//                for item in 0..<charactersCollectionView.numberOfItems(inSection: section) {
-//                    let indexPath = IndexPath(item: item, section: section)
-//                    let cellSize = collectionViewLayout.collectionViewContentSize
-//                    totalHeight += cellSize.height
-//                }
-//            }
-//        }
-//        return totalHeight
-//    }
-
-
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
