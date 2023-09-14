@@ -1,6 +1,7 @@
 # RickAndMorty 
 
-Here is my second project after Movie App, but also my first without using storyboards. I used the programmatic ui. 
+Here is my second project after Movie App, but also my first without using storyboards.
+
 
 ## Technologies I use
 
