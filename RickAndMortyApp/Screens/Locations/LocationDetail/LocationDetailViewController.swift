@@ -34,6 +34,7 @@ class LocationDetailViewController: UIViewController {
         let charactersCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         charactersCollectionView.showsHorizontalScrollIndicator = false
+        charactersCollectionView.isScrollEnabled = false
         return charactersCollectionView
     }()
     
@@ -173,6 +174,7 @@ class LocationDetailViewController: UIViewController {
         
         view.backgroundColor = .white
         view.addSubview(scrollView)
+        
         scrollView.addSubview(locationDetailImageView)
         scrollView.addSubview(titleAndDetailViewtackView)
         scrollView.addSubview(stackView)
@@ -203,6 +205,12 @@ class LocationDetailViewController: UIViewController {
         featureLabel2.text = viewModel?.location?.dimension
         
         NSLayoutConstraint.activate([
+            
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             locationDetailImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             locationDetailImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             locationDetailImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -226,15 +234,11 @@ class LocationDetailViewController: UIViewController {
             residentsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
             charactersCollectionView.topAnchor.constraint(equalTo: residentsLabel.bottomAnchor, constant: 10),
-            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            charactersCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10),
-            charactersCollectionView.heightAnchor.constraint(equalToConstant: view.frame.height),
+            charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
         ])
         
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
@@ -243,6 +247,14 @@ class LocationDetailViewController: UIViewController {
     func prepare(location: Locations) {
         viewModel = LocationDetailViewModel(location: location)
     }
+    
+    func calculateCharactersCollectionViewHeight() -> CGFloat {
+        var totalHeight: CGFloat = 0.0
+        let contentSize = charactersCollectionView.collectionViewLayout.collectionViewContentSize
+        totalHeight = contentSize.height
+        return totalHeight
+    }
+    
     
     func fetchCharacters() {
         guard let residents = viewModel?.location?.residents else { return }
@@ -292,6 +304,13 @@ extension LocationDetailViewController: UICollectionViewDataSource {
            let imgUrl = URL(string: "\(posterPath)") {
             cell.characterImageView.loadImg(url: imgUrl)
         }
+        
+        if let charactersLayout = charactersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+               let charactersHeight = calculateCharactersCollectionViewHeight()
+               charactersCollectionView.frame.size.height = charactersHeight
+               scrollView.contentSize.height = charactersCollectionView.frame.origin.y + charactersHeight
+           }
+
         return cell
     }
 }

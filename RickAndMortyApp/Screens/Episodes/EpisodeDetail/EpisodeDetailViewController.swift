@@ -239,8 +239,7 @@ class EpisodeDetailViewController: UIViewController {
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-           
+        
         ])
         
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
