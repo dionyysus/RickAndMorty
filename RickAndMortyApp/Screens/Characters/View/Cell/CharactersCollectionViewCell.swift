@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CharactersCollectionViewCell: UICollectionViewCell {
+class CharactersCollectionViewCell: UICollectionViewCell{
     
     static let identifier = "CharactersCollectionViewCell"
     
@@ -32,6 +32,12 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         return nameLabel
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        characterImageView.image = nil
+        nameLabel.text = nil
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.addSubview(characterImageView)
@@ -53,6 +59,6 @@ class CharactersCollectionViewCell: UICollectionViewCell {
         fatalError("erroor")
     }
     
-
+    
 }
 

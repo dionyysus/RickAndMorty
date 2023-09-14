@@ -6,12 +6,12 @@
 //
 
 import UIKit
+import SDWebImage
 
-final class CharactersViewController: UIViewController {
+final class CharactersViewController: UIViewController{
     
     private var viewModel: CharacterViewModel?
-    private var characterviewModel: CharacterViewModel?
-
+    
     let searchBar = UISearchBar()
     var isSearch : Bool = false
     
@@ -22,7 +22,8 @@ final class CharactersViewController: UIViewController {
         charactersCollectionView.translatesAutoresizingMaskIntoConstraints = false
         return charactersCollectionView
     }()
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -101,10 +102,10 @@ extension CharactersViewController: UICollectionViewDataSource {
         }
         
         cell.nameLabel.text = characterFeatures.name
-
+        
         if let posterPath = characterFeatures.image,
            let imgUrl = URL(string: "\(posterPath)") {
-            cell.characterImageView.loadImg(url: imgUrl)
+            cell.characterImageView.sd_setImage(with: imgUrl, placeholderImage: nil, options: .refreshCached)
         }
         return cell
     }

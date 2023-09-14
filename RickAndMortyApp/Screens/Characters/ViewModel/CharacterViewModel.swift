@@ -18,7 +18,6 @@ class CharacterViewModel {
         self.apiManager = apiManager
     }
     
-    
     func fetchCharacters(completion: @escaping () -> Void) {
         APIManager.shared.execute(url: APIManager.shared.charactersURL) { (data: CharacterResponse?) in
             self.characters = data?.results ?? []
@@ -27,7 +26,7 @@ class CharacterViewModel {
             }
         }
     }
-
+    
     func search(for query: String) {
         filteredCharacters = characters.filter { character in
             return character.name?.lowercased().contains(query.lowercased()) ?? false
