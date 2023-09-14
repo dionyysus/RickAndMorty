@@ -232,7 +232,8 @@ class HomeViewController: UIViewController {
         }
         
         navigationItem.title = "Rick And Morty"
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationItem.largeTitleDisplayMode = .never
+//        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         
