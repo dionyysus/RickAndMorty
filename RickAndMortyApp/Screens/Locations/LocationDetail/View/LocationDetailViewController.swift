@@ -40,21 +40,21 @@ class LocationDetailViewController: UIViewController {
     }()
     
     private lazy var titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.text = "Earth"
-        titleLabel.textColor = .black
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        return titleLabel
+        let label = UILabel()
+        label.text = "Earth"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 25.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var residentsLabel: UILabel = {
-        let residentsLabel = UILabel()
-        residentsLabel.text = "Residents"
-        residentsLabel.textColor = .black
-        residentsLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
-        residentsLabel.translatesAutoresizingMaskIntoConstraints = false
-        return residentsLabel
+        let label = UILabel()
+        label.text = "Residents"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 25.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var detailView: UIView = {
@@ -121,7 +121,6 @@ class LocationDetailViewController: UIViewController {
         return stackView
     }()
     
-    
     private lazy var typeLabel: UILabel = {
         let typeLabel = UILabel()
         typeLabel.text = "Type: "
@@ -132,30 +131,30 @@ class LocationDetailViewController: UIViewController {
     }()
     
     private lazy var dimensionLabel: UILabel = {
-        let dimensionLabel = UILabel()
-        dimensionLabel.text = "Dimension: "
-        dimensionLabel.textColor = .orange
-        dimensionLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
-        return dimensionLabel
+        let label = UILabel()
+        label.text = "Dimension: "
+        label.textColor = .orange
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel1: UILabel = {
-        let featureLabel1 = UILabel()
-        featureLabel1.text = ""
-        featureLabel1.textColor = .black
-        featureLabel1.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel1.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel1
+        let label = UILabel()
+        label.text = ""
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel2: UILabel = {
-        let featureLabel2 = UILabel()
-        featureLabel2.text = ""
-        featureLabel2.textColor = .black
-        featureLabel2.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel2.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel2
+        let label = UILabel()
+        label.text = ""
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
@@ -238,8 +237,6 @@ class LocationDetailViewController: UIViewController {
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            
         ])
         
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
@@ -255,7 +252,6 @@ class LocationDetailViewController: UIViewController {
         totalHeight = contentSize.height
         return totalHeight
     }
-    
     
     func fetchCharacters() {
         guard let residents = viewModel?.location?.residents else { return }

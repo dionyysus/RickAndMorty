@@ -23,13 +23,13 @@ class CharactersCollectionViewCell: UICollectionViewCell{
     }()
     
     var nameLabel: UILabel = {
-        let nameLabel = UILabel()
-        nameLabel.text = "Rick Sanchez"
-        nameLabel.textColor = .black
-        nameLabel.textAlignment = .center
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        return nameLabel
+        let label = UILabel()
+        label.text = "Rick Sanchez"
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     override func prepareForReuse() {

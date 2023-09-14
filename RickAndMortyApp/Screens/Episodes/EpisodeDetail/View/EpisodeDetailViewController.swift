@@ -53,21 +53,21 @@ class EpisodeDetailViewController: UIViewController {
     }()
     
     private lazy var titleNameabel: UILabel = {
-        let featureLabel1 = UILabel()
-        featureLabel1.text = ""
-        featureLabel1.textColor = .black
-        featureLabel1.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel1.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel1
+        let label = UILabel()
+        label.text = ""
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var residentsLabel: UILabel = {
-        let residentsLabel = UILabel()
-        residentsLabel.text = "Characters"
-        residentsLabel.textColor = .black
-        residentsLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
-        residentsLabel.translatesAutoresizingMaskIntoConstraints = false
-        return residentsLabel
+        let label = UILabel()
+        label.text = "Characters"
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 25.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var detailView: UIView = {
@@ -144,30 +144,30 @@ class EpisodeDetailViewController: UIViewController {
     }()
     
     private lazy var dimensionLabel: UILabel = {
-        let dimensionLabel = UILabel()
-        dimensionLabel.text = "Episode: "
-        dimensionLabel.textColor = .orange
-        dimensionLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
-        return dimensionLabel
+        let label = UILabel()
+        label.text = "Episode: "
+        label.textColor = .orange
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel1: UILabel = {
-        let featureLabel1 = UILabel()
-        featureLabel1.text = ""
-        featureLabel1.textColor = .black
-        featureLabel1.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel1.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel1
+        let label = UILabel()
+        label.text = ""
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel2: UILabel = {
-        let featureLabel2 = UILabel()
-        featureLabel2.text = ""
+        let label = UILabel()
+        label.text = ""
         featureLabel2.textColor = .black
-        featureLabel2.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel2.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel2
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     override func viewDidLoad() {
