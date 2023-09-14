@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class LocationDetailViewController: UIViewController {
     
@@ -302,7 +303,7 @@ extension LocationDetailViewController: UICollectionViewDataSource {
         cell.nameLabel.text = characterviewModel?.characters[indexPath.row].name
         if let posterPath = characterviewModel?.characters[indexPath.row].image,
            let imgUrl = URL(string: "\(posterPath)") {
-            cell.characterImageView.loadImg(url: imgUrl)
+            cell.characterImageView.sd_setImage(with: imgUrl, placeholderImage: nil, options: .refreshCached)
         }
         
         if let charactersLayout = charactersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {

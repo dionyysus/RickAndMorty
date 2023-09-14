@@ -49,7 +49,6 @@ class SeasonCollectionViewCell: UICollectionViewCell {
             seasonButton.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor),
         ])
         contentView.widthAnchor.constraint(equalToConstant: 120).isActive = true
-
     }
     
     required init?(coder: NSCoder) {

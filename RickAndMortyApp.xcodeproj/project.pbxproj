@@ -21,6 +21,7 @@
 		0A486C032AA7C913002AD93F /* LocationDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A486C022AA7C913002AD93F /* LocationDetailViewModel.swift */; };
 		0A486C052AA7C920002AD93F /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A486C042AA7C920002AD93F /* LocationDetailViewController.swift */; };
 		0A7716522AA3645000DD893A /* CharacterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7716512AA3645000DD893A /* CharacterResponse.swift */; };
+		0A7939432AB3459700B4A4FF /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 0A7939422AB3459700B4A4FF /* SDWebImage */; };
 		0ABCE9382A9D63A2007072EB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABCE9372A9D63A2007072EB /* DetailViewController.swift */; };
 		0ABCE93A2A9D63AF007072EB /* CharactersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABCE9392A9D63AF007072EB /* CharactersViewController.swift */; };
 		0ABCE9402A9D67E2007072EB /* CharactersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABCE93E2A9D67E2007072EB /* CharactersCollectionViewCell.swift */; };
@@ -67,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7939432AB3459700B4A4FF /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +331,9 @@
 			dependencies = (
 			);
 			name = RickAndMortyApp;
+			packageProductDependencies = (
+				0A7939422AB3459700B4A4FF /* SDWebImage */,
+			);
 			productName = RickAndMortyApp;
 			productReference = 0A2E690C2A9D4038004E065B /* RickAndMortyApp.app */;
 			productType = "com.apple.product-type.application";
@@ -357,6 +362,9 @@
 				Base,
 			);
 			mainGroup = 0A2E69032A9D4038004E065B;
+			packageReferences = (
+				0A7939412AB3459700B4A4FF /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 0A2E690D2A9D4038004E065B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -614,6 +622,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0A7939412AB3459700B4A4FF /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0A7939422AB3459700B4A4FF /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0A7939412AB3459700B4A4FF /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0A2E69042A9D4038004E065B /* Project object */;
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationViewController: UIViewController {
+final class LocationViewController: UIViewController {
     
     private var viewModel: LocationViewModel?
     
