@@ -13,7 +13,6 @@ final class LocationViewController: UIViewController {
     
     let searchBar = UISearchBar()
     var isSearch : Bool = false
-
     
     private let locationsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,7 +32,7 @@ final class LocationViewController: UIViewController {
         locationsCollectionView.register(LocationsCollectionViewCell.self, forCellWithReuseIdentifier: LocationsCollectionViewCell.identifier)
         locationsCollectionView.delegate = self
         locationsCollectionView.dataSource = self
-    
+        
         viewModel?.fetchLocations { [weak self] in
             self?.locationsCollectionView.reloadData()
         }
@@ -133,7 +132,7 @@ extension LocationViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5.0
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 5.0
     }

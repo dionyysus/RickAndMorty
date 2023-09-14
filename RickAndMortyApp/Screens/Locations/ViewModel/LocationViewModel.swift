@@ -11,9 +11,9 @@ class LocationViewModel {
     
     var locations: [Locations] = []
     var filteredLocations: [Locations] = []
-
+    
     private var apiManager: APIManager?
-
+    
     init(apiManager: APIManager) {
         self.apiManager = apiManager
     }

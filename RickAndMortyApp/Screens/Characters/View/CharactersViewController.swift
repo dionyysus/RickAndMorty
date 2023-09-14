@@ -23,7 +23,6 @@ final class CharactersViewController: UIViewController{
         return charactersCollectionView
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

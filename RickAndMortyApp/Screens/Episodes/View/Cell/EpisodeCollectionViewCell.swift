@@ -16,37 +16,30 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-//    private lazy var episodeGoButton: UIButton = {
-//        let episodeGoButton = UIButton()
-//        episodeGoButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-//        episodeGoButton.translatesAutoresizingMaskIntoConstraints = false
-//        return episodeGoButton
-//    }()
-    
+
     var nameLabel: UILabel = {
-        let nameLabel = UILabel()
-        nameLabel.text = "AA"
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        nameLabel.textColor = .black
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        return nameLabel
+        let label = UILabel()
+        label.text = "AA"
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     var typeLabel: UILabel = {
-        let typeLabel = UILabel()
-        typeLabel.text = "AA"
-        typeLabel.textColor = .black
-        typeLabel.translatesAutoresizingMaskIntoConstraints = false
-        return typeLabel
+        let label = UILabel()
+        label.text = "AA"
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     var dimensionLabel: UILabel = {
-        let dimensionLabel = UILabel()
-        dimensionLabel.text = "AA"
-        dimensionLabel.textColor = .black
-        dimensionLabel.translatesAutoresizingMaskIntoConstraints = false
-        return dimensionLabel
+        let label = UILabel()
+        label.text = "AA"
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var stackView: UIStackView = {
@@ -61,23 +54,23 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     }()
     
     private lazy var typeStackView: UIStackView = {
-        let typeStackView = UIStackView()
-        typeStackView.backgroundColor = .clear
-        typeStackView.distribution = .fillProportionally
-        typeStackView.axis = .horizontal
-        typeStackView.spacing = 0
-        typeStackView.translatesAutoresizingMaskIntoConstraints = false
-        return typeStackView
+        let stackView = UIStackView()
+        stackView.backgroundColor = .clear
+        stackView.distribution = .fillProportionally
+        stackView.axis = .horizontal
+        stackView.spacing = 0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private lazy var dimensionStackView: UIStackView = {
-        let dimensionStackView = UIStackView()
-        dimensionStackView.backgroundColor = .clear
-        dimensionStackView.distribution = .fillProportionally
-        dimensionStackView.axis = .horizontal
-        dimensionStackView.spacing = 0
-        dimensionStackView.translatesAutoresizingMaskIntoConstraints = false
-        return dimensionStackView
+        let stackView = UIStackView()
+        stackView.backgroundColor = .clear
+        stackView.distribution = .fillProportionally
+        stackView.axis = .horizontal
+        stackView.spacing = 0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     override init(frame: CGRect) {
@@ -85,7 +78,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(contentContainerView)
         contentContainerView.addSubview(stackView)
-        //contentContainerView.addSubview(episodeGoButton)
         
         contentContainerView.layer.borderWidth = 2.0
         contentContainerView.layer.borderColor = UIColor.systemMint.cgColor
@@ -106,10 +98,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
             stackView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor, constant: -10),
             stackView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
-            
-//            episodeGoButton.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
-//            episodeGoButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-//            episodeGoButton.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: -10),
         ])
     }
     

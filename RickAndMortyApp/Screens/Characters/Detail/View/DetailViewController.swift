@@ -22,13 +22,13 @@ class DetailViewController: UIViewController {
     }()
     
     private lazy var titleLabel: UILabel = {
-        let titleLabel = UILabel()
-        titleLabel.text = "Rick Sanchez"
-        titleLabel.textColor = .black
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 25.0)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        return titleLabel
+        let label = UILabel()
+        label.text = "Rick Sanchez"
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 25.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var detailView: UIView = {
@@ -126,21 +126,21 @@ class DetailViewController: UIViewController {
     }()
     
     private lazy var spesiecLabel: UILabel = {
-        let spesiecLabel = UILabel()
-        spesiecLabel.text = "Species: "
-        spesiecLabel.textColor = .orange
-        spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        spesiecLabel.translatesAutoresizingMaskIntoConstraints = false
-        return spesiecLabel
+        let label = UILabel()
+        label.text = "Species: "
+        label.textColor = .orange
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var genderLabel: UILabel = {
-        let spesiecLabel = UILabel()
-        spesiecLabel.text = "Gender: "
-        spesiecLabel.textColor = .orange
-        spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        spesiecLabel.translatesAutoresizingMaskIntoConstraints = false
-        return spesiecLabel
+        let label = UILabel()
+        label.text = "Gender: "
+        label.textColor = .orange
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var origineLabel: UILabel = {
@@ -153,57 +153,57 @@ class DetailViewController: UIViewController {
     }()
     
     private lazy var locationLabel: UILabel = {
-        let spesiecLabel = UILabel()
-        spesiecLabel.text = "Location: "
-        spesiecLabel.textColor = .orange
-        spesiecLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
-        spesiecLabel.translatesAutoresizingMaskIntoConstraints = false
-        return spesiecLabel
+        let label = UILabel()
+        label.text = "Location: "
+        label.textColor = .orange
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel1: UILabel = {
-        let featureLabel1 = UILabel()
-        featureLabel1.text = "Alive"
-        featureLabel1.textColor = .black
-        featureLabel1.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel1.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel1
+        let label = UILabel()
+        label.text = "Alive"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel2: UILabel = {
-        let featureLabel2 = UILabel()
-        featureLabel2.text = "Human"
-        featureLabel2.textColor = .black
-        featureLabel2.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel2.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel2
+        let label = UILabel()
+        label.text = "Human"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel3: UILabel = {
-        let featureLabel3 = UILabel()
-        featureLabel3.text = "Male"
-        featureLabel3.textColor = .black
-        featureLabel3.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel3.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel3
+        let label = UILabel()
+        label.text = "Male"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel4: UILabel = {
-        let featureLabel3 = UILabel()
-        featureLabel3.text = "Earth"
-        featureLabel3.textColor = .black
-        featureLabel3.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel3.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel3
+        let label = UILabel()
+        label.text = "Earth"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var featureLabel5: UILabel = {
-        let featureLabel3 = UILabel()
-        featureLabel3.text = "Earth"
-        featureLabel3.textColor = .black
-        featureLabel3.font = UIFont.systemFont(ofSize: 20.0)
-        featureLabel3.translatesAutoresizingMaskIntoConstraints = false
-        return featureLabel3
+        let label = UILabel()
+        label.text = "Earth"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 20.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     override func viewDidLoad() {
