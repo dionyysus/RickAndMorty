@@ -2,7 +2,7 @@
 
 Here is my second project after Movie App, but also my first without using storyboards. I used the programmatic ui. 
 
-#Technologies I use
+## Technologies I use
 
 Programmatic UI, Swift, UIKit, MVVM, 
 
