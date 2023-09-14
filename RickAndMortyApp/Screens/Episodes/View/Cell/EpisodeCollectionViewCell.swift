@@ -17,12 +17,12 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-//    private lazy var episodeGoButton: UIButton = {
-//        let episodeGoButton = UIButton()
-//        episodeGoButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
-//        episodeGoButton.translatesAutoresizingMaskIntoConstraints = false
-//        return episodeGoButton
-//    }()
+    //    private lazy var episodeGoButton: UIButton = {
+    //        let episodeGoButton = UIButton()
+    //        episodeGoButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+    //        episodeGoButton.translatesAutoresizingMaskIntoConstraints = false
+    //        return episodeGoButton
+    //    }()
     
     var nameLabel: UILabel = {
         let nameLabel = UILabel()
@@ -85,7 +85,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
         
         contentView.addSubview(contentContainerView)
         contentContainerView.addSubview(stackView)
-        //contentContainerView.addSubview(episodeGoButton)
         
         contentContainerView.layer.borderWidth = 2.0
         contentContainerView.layer.borderColor = UIColor.systemMint.cgColor
@@ -106,10 +105,6 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
             stackView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 10),
             stackView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor, constant: -10),
             stackView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -10),
-            
-//            episodeGoButton.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 10),
-//            episodeGoButton.leadingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -30),
-//            episodeGoButton.bottomAnchor.constraint(equalTo: stackView.bottomAnchor, constant: -10),
         ])
     }
     

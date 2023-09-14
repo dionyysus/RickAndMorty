@@ -12,7 +12,6 @@ class EpisodeDetailViewController: UIViewController {
     private var viewModel: EpisodeDetailViewModel?
     private var characterviewModel: CharacterViewModel?
     
-    
     private lazy var scrollView: UIScrollView = {
         let screensize: CGRect = UIScreen.main.bounds
         let screenWidth = screensize.width
@@ -26,10 +25,10 @@ class EpisodeDetailViewController: UIViewController {
     
     private lazy var episodeDetailImageView: UIImageView = {
         let locationDetailImageView = UIImageView()
-        locationDetailImageView.image = UIImage(named: "location")
+        locationDetailImageView.image = UIImage(named: "episodeBanner")
         locationDetailImageView.translatesAutoresizingMaskIntoConstraints = false
         locationDetailImageView.contentMode = .scaleAspectFill
-        locationDetailImageView.layer.cornerRadius = 15.0
+        locationDetailImageView.layer.cornerRadius = 5.0
         locationDetailImageView.layer.masksToBounds = true
         return locationDetailImageView
     }()
@@ -61,7 +60,6 @@ class EpisodeDetailViewController: UIViewController {
         featureLabel1.translatesAutoresizingMaskIntoConstraints = false
         return featureLabel1
     }()
-    
     
     private lazy var residentsLabel: UILabel = {
         let residentsLabel = UILabel()
@@ -234,16 +232,13 @@ class EpisodeDetailViewController: UIViewController {
             residentsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             residentsLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             
-            
             charactersCollectionView.topAnchor.constraint(equalTo: residentsLabel.bottomAnchor, constant: 10),
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        
         ])
         
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: view.frame.height)
-        
     }
     
     func prepare(episode: Episodes) {
@@ -315,11 +310,11 @@ extension EpisodeDetailViewController: UICollectionViewDataSource {
             cell.characterImageView.sd_setImage(with: imgUrl, placeholderImage: nil, options: .refreshCached)
         }
         
-        if let charactersLayout = charactersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-               let charactersHeight = calculateCharactersCollectionViewHeight()
-               charactersCollectionView.frame.size.height = charactersHeight
-               scrollView.contentSize.height = charactersCollectionView.frame.origin.y + charactersHeight
-           }
+        if charactersCollectionView.collectionViewLayout is UICollectionViewFlowLayout {
+            let charactersHeight = calculateCharactersCollectionViewHeight()
+            charactersCollectionView.frame.size.height = charactersHeight
+            scrollView.contentSize.height = charactersCollectionView.frame.origin.y + charactersHeight
+        }
         
         return cell
     }

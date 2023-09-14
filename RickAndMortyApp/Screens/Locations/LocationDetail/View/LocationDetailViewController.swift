@@ -21,10 +21,10 @@ class LocationDetailViewController: UIViewController {
     
     private lazy var locationDetailImageView: UIImageView = {
         let locationDetailImageView = UIImageView()
-        locationDetailImageView.image = UIImage(named: "location")
+        locationDetailImageView.image = UIImage(named: "locationBanner")
         locationDetailImageView.translatesAutoresizingMaskIntoConstraints = false
         locationDetailImageView.contentMode = .scaleAspectFill
-        locationDetailImageView.layer.cornerRadius = 15.0
+        locationDetailImageView.layer.cornerRadius = 5.0
         locationDetailImageView.layer.masksToBounds = true
         return locationDetailImageView
     }()
@@ -307,11 +307,11 @@ extension LocationDetailViewController: UICollectionViewDataSource {
         }
         
         if let charactersLayout = charactersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-               let charactersHeight = calculateCharactersCollectionViewHeight()
-               charactersCollectionView.frame.size.height = charactersHeight
-               scrollView.contentSize.height = charactersCollectionView.frame.origin.y + charactersHeight
-           }
-
+            let charactersHeight = calculateCharactersCollectionViewHeight()
+            charactersCollectionView.frame.size.height = charactersHeight
+            scrollView.contentSize.height = charactersCollectionView.frame.origin.y + charactersHeight
+        }
+        
         return cell
     }
 }

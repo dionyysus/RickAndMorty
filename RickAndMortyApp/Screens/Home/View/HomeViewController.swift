@@ -183,7 +183,7 @@ class HomeViewController: UIViewController {
         return stackView
     }()
     
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -233,7 +233,6 @@ class HomeViewController: UIViewController {
         
         navigationItem.title = "Rick And Morty"
         navigationItem.largeTitleDisplayMode = .never
-//        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         
@@ -307,7 +306,6 @@ class HomeViewController: UIViewController {
             charactersCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             charactersCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             charactersCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            //charactersCollectionView.heightAnchor.constraint(equalTo: charactersCollectionView.contentSize.height),
         ])
         
         episodeTitleLabel.isUserInteractionEnabled = true
@@ -351,8 +349,8 @@ extension HomeViewController: UICollectionViewDataSource {
             return episodeViewModel?.episodes.count ?? 0
         }
     }
-   
-
+    
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == charactersCollectionView {
@@ -371,10 +369,10 @@ extension HomeViewController: UICollectionViewDataSource {
             }
             
             if let charactersLayout = charactersCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-                   let charactersHeight = calculateCharactersCollectionViewHeight()
-                   charactersCollectionView.frame.size.height = charactersHeight
-                   scrollView.contentSize.height = charactersCollectionView.frame.origin.y + charactersHeight
-               }
+                let charactersHeight = calculateCharactersCollectionViewHeight()
+                charactersCollectionView.frame.size.height = charactersHeight
+                scrollView.contentSize.height = charactersCollectionView.frame.origin.y + charactersHeight
+            }
             return cell
         } else if collectionView == episodeCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCollectionViewCell.identifier, for: indexPath) as? EpisodeCollectionViewCell else {

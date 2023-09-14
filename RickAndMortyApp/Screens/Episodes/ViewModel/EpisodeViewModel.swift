@@ -11,9 +11,9 @@ class EpisodeViewModel {
     
     var episodes: [Episodes] = []
     var filteredEpisodes: [Episodes] = []
-
+    
     private var apiManager: APIManager?
-
+    
     init(apiManager: APIManager) {
         self.apiManager = apiManager
     }

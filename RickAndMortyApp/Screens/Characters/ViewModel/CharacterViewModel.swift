@@ -32,5 +32,5 @@ class CharacterViewModel {
             return character.name?.lowercased().contains(query.lowercased()) ?? false
         }
     }
-
+    
 }
